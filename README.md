@@ -206,11 +206,6 @@ azure-data-portfolio/
    python analysis/sales_analysis.py
    ```
 
-## Author
-
-**[Your Name]**
-- LinkedIn: [Your LinkedIn]
-- Email: [Your Email]
 
 ## License
 
