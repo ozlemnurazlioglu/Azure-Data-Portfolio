@@ -1,0 +1,216 @@
+{
+    "name": "Synapse-Pipeline-Monitor",
+    "displayName": "Data Pipeline Monitor & Alert",
+    "description": "Scheduled flow that polls Azure Synapse pipeline runs every 30 minutes, logs results to SharePoint, and sends alerts on failure via Teams and email.",
+    "state": "Enabled",
+    "definition": {
+        "triggers": {
+            "Recurrence_30min": {
+                "type": "Recurrence",
+                "recurrence": {
+                    "frequency": "Minute",
+                    "interval": 30,
+                    "timeZone": "UTC"
+                }
+            }
+        },
+        "actions": {
+            "Initialize_PipelineStatus": {
+                "type": "InitializeVariable",
+                "inputs": {
+                    "variables": [
+                        { "name": "varPipelineStatus", "type": "string", "value": "" }
+                    ]
+                },
+                "runAfter": {}
+            },
+            "Initialize_FailedPipelines": {
+                "type": "InitializeVariable",
+                "inputs": {
+                    "variables": [
+                        { "name": "varFailedPipelines", "type": "array", "value": [] }
+                    ]
+                },
+                "runAfter": { "Initialize_PipelineStatus": ["Succeeded"] }
+            },
+            "HTTP_Get_Pipeline_Runs": {
+                "type": "Http",
+                "inputs": {
+                    "method": "GET",
+                    "uri": "https://sales-synapse-ws.dev.azuresynapse.net/pipelineruns?api-version=2020-12-01",
+                    "queries": {
+                        "lastUpdatedAfter": "@{addMinutes(utcNow(), -30)}",
+                        "lastUpdatedBefore": "@{utcNow()}"
+                    },
+                    "authentication": {
+                        "type": "ManagedServiceIdentity",
+                        "audience": "https://dev.azuresynapse.net"
+                    }
+                },
+                "runAfter": { "Initialize_FailedPipelines": ["Succeeded"] }
+            },
+            "Parse_JSON_Response": {
+                "type": "ParseJson",
+                "inputs": {
+                    "content": "@body('HTTP_Get_Pipeline_Runs')",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "value": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "runId": { "type": "string" },
+                                        "pipelineName": { "type": "string" },
+                                        "status": { "type": "string" },
+                                        "runStart": { "type": "string" },
+                                        "runEnd": { "type": "string" },
+                                        "durationInMs": { "type": "integer" },
+                                        "message": { "type": "string" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "runAfter": { "HTTP_Get_Pipeline_Runs": ["Succeeded"] }
+            },
+            "Apply_To_Each_Run": {
+                "type": "Foreach",
+                "foreach": "@body('Parse_JSON_Response')?['value']",
+                "actions": {
+                    "Condition_Pipeline_Failed": {
+                        "type": "If",
+                        "expression": {
+                            "or": [
+                                { "equals": ["@items('Apply_To_Each_Run')?['status']", "Failed"] },
+                                { "equals": ["@items('Apply_To_Each_Run')?['status']", "Cancelled"] }
+                            ]
+                        },
+                        "actions": {
+                            "Append_To_FailedPipelines": {
+                                "type": "AppendToArrayVariable",
+                                "inputs": {
+                                    "name": "varFailedPipelines",
+                                    "value": {
+                                        "runId": "@{items('Apply_To_Each_Run')?['runId']}",
+                                        "pipelineName": "@{items('Apply_To_Each_Run')?['pipelineName']}",
+                                        "status": "@{items('Apply_To_Each_Run')?['status']}",
+                                        "runStart": "@{items('Apply_To_Each_Run')?['runStart']}",
+                                        "error": "@{items('Apply_To_Each_Run')?['message']}"
+                                    }
+                                }
+                            }
+                        },
+                        "else": {
+                            "actions": {
+                                "Log_Success_To_SharePoint": {
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "host": {
+                                            "connection": { "name": "@parameters('$connections')['shared_sharepointonline']['connectionId']" },
+                                            "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline" }
+                                        },
+                                        "method": "post",
+                                        "path": "/datasets/@{encodeURIComponent('https://contoso.sharepoint.com/sites/DataOps')}/tables/@{encodeURIComponent('Pipeline Runs')}/items",
+                                        "body": {
+                                            "PipelineName": "@{items('Apply_To_Each_Run')?['pipelineName']}",
+                                            "RunID": "@{items('Apply_To_Each_Run')?['runId']}",
+                                            "Status": "@{items('Apply_To_Each_Run')?['status']}",
+                                            "StartTime": "@{items('Apply_To_Each_Run')?['runStart']}",
+                                            "EndTime": "@{items('Apply_To_Each_Run')?['runEnd']}",
+                                            "DurationMinutes": "@{div(items('Apply_To_Each_Run')?['durationInMs'], 60000)}",
+                                            "MonitoredAt": "@{utcNow()}"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "runAfter": { "Parse_JSON_Response": ["Succeeded"] }
+            },
+            "Condition_Any_Failures": {
+                "type": "If",
+                "expression": {
+                    "greater": ["@length(variables('varFailedPipelines'))", 0]
+                },
+                "runAfter": { "Apply_To_Each_Run": ["Succeeded"] },
+                "actions": {
+                    "Create_HTML_Table": {
+                        "type": "Table",
+                        "inputs": {
+                            "from": "@variables('varFailedPipelines')",
+                            "format": "HTML",
+                            "columns": [
+                                { "header": "Pipeline", "value": "@item()?['pipelineName']" },
+                                { "header": "Status", "value": "@item()?['status']" },
+                                { "header": "Started", "value": "@item()?['runStart']" },
+                                { "header": "Error", "value": "@item()?['error']" }
+                            ]
+                        }
+                    },
+                    "Create_Incident_In_SharePoint": {
+                        "type": "ApiConnection",
+                        "inputs": {
+                            "host": {
+                                "connection": { "name": "@parameters('$connections')['shared_sharepointonline']['connectionId']" },
+                                "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline" }
+                            },
+                            "method": "post",
+                            "path": "/datasets/@{encodeURIComponent('https://contoso.sharepoint.com/sites/DataOps')}/tables/@{encodeURIComponent('Incidents')}/items",
+                            "body": {
+                                "Title": "Pipeline Failure Alert — @{utcNow()}",
+                                "FailedCount": "@{length(variables('varFailedPipelines'))}",
+                                "Details": "@{body('Create_HTML_Table')}",
+                                "Severity": "High",
+                                "Status": "Open",
+                                "AssignedTo": "data-engineering@contoso.com"
+                            }
+                        },
+                        "runAfter": { "Create_HTML_Table": ["Succeeded"] }
+                    },
+                    "Post_Alert_To_Teams": {
+                        "type": "ApiConnection",
+                        "inputs": {
+                            "host": {
+                                "connection": { "name": "@parameters('$connections')['shared_teams']['connectionId']" },
+                                "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_teams" }
+                            },
+                            "method": "post",
+                            "path": "/v3/beta/teams/@{encodeURIComponent('data-ops-team-id')}/channels/@{encodeURIComponent('Pipeline Alerts')}/messages",
+                            "body": {
+                                "content": "🚨 <b>Pipeline Failure Alert</b><br/><br/>@{length(variables('varFailedPipelines'))} pipeline(s) failed in the last 30 minutes.<br/><br/>@{body('Create_HTML_Table')}<br/><br/>Incident logged: <a href='https://contoso.sharepoint.com/sites/DataOps/Lists/Incidents'>View Incidents</a>"
+                            }
+                        },
+                        "runAfter": { "Create_Incident_In_SharePoint": ["Succeeded"] }
+                    },
+                    "Send_Alert_Email": {
+                        "type": "ApiConnection",
+                        "inputs": {
+                            "host": {
+                                "connection": { "name": "@parameters('$connections')['shared_office365']['connectionId']" },
+                                "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_office365" }
+                            },
+                            "method": "post",
+                            "path": "/v2/Mail",
+                            "body": {
+                                "To": "data-engineering@contoso.com",
+                                "Subject": "🚨 Synapse Pipeline Failure — @{length(variables('varFailedPipelines'))} failed run(s)",
+                                "Body": "<h2>Pipeline Failure Report</h2><p>The following pipelines failed during the monitoring window (@{addMinutes(utcNow(), -30)} to @{utcNow()}):</p>@{body('Create_HTML_Table')}<p><a href='https://web.azuresynapse.net/monitoring/pipelineruns'>Open Synapse Studio → Monitor</a></p>",
+                                "Importance": "High"
+                            }
+                        },
+                        "runAfter": { "Post_Alert_To_Teams": ["Succeeded"] }
+                    }
+                }
+            }
+        }
+    },
+    "connectionReferences": {
+        "shared_sharepointonline": { "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline" } },
+        "shared_teams": { "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_teams" } },
+        "shared_office365": { "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_office365" } }
+    }
+}

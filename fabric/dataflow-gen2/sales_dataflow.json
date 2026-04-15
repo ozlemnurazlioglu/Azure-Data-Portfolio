@@ -1,0 +1,146 @@
+{
+    "name": "DF_Sales_Transform",
+    "description": "Dataflow Gen2 for Sales Analytics — ingests CSV from OneLake, transforms with Power Query Online, loads to Lakehouse Delta tables",
+    "annotations": [],
+    "type": "MappingDataFlow",
+    "typeProperties": {
+        "sources": [
+            {
+                "name": "SourceFactSales",
+                "description": "Read raw sales CSV from Lakehouse Files",
+                "dataset": {
+                    "type": "LakehouseTable",
+                    "lakehouse": "SalesLakehouse",
+                    "path": "Files/raw/fact_sales.csv",
+                    "format": "DelimitedText",
+                    "firstRowAsHeader": true
+                }
+            },
+            {
+                "name": "SourceDimCustomers",
+                "dataset": {
+                    "type": "LakehouseTable",
+                    "lakehouse": "SalesLakehouse",
+                    "path": "Files/raw/dim_customers.csv",
+                    "format": "DelimitedText",
+                    "firstRowAsHeader": true
+                }
+            },
+            {
+                "name": "SourceDimProducts",
+                "dataset": {
+                    "type": "LakehouseTable",
+                    "lakehouse": "SalesLakehouse",
+                    "path": "Files/raw/dim_products.csv",
+                    "format": "DelimitedText",
+                    "firstRowAsHeader": true
+                }
+            }
+        ],
+        "transformations": [
+            {
+                "name": "CastSalesTypes",
+                "description": "Cast string columns to appropriate types",
+                "type": "DerivedColumn",
+                "inputs": ["SourceFactSales"],
+                "columns": {
+                    "order_date": { "expression": "toDate(order_date, 'yyyy-MM-dd')" },
+                    "ship_date": { "expression": "toDate(ship_date, 'yyyy-MM-dd')" },
+                    "quantity": { "expression": "toInteger(quantity)" },
+                    "unit_price": { "expression": "toDecimal(unit_price, 10, 2)" },
+                    "discount_pct": { "expression": "toDecimal(discount_pct, 5, 2)" },
+                    "total_amount": { "expression": "toDecimal(total_amount, 15, 2)" },
+                    "cost_amount": { "expression": "toDecimal(cost_amount, 15, 2)" },
+                    "profit": { "expression": "toDecimal(profit, 15, 2)" }
+                }
+            },
+            {
+                "name": "ValidateSalesRows",
+                "description": "Filter out invalid records",
+                "type": "Filter",
+                "inputs": ["CastSalesTypes"],
+                "expression": "quantity > 0 && total_amount > 0 && !isNull(customer_id) && !isNull(product_id)"
+            },
+            {
+                "name": "AddComputedColumns",
+                "description": "Add shipping_days and net_amount",
+                "type": "DerivedColumn",
+                "inputs": ["ValidateSalesRows"],
+                "columns": {
+                    "shipping_days": { "expression": "daysBetween(order_date, ship_date)" },
+                    "net_amount": { "expression": "total_amount - coalesce(discount_pct * total_amount, 0)" },
+                    "order_year": { "expression": "year(order_date)" },
+                    "order_month": { "expression": "month(order_date)" }
+                }
+            },
+            {
+                "name": "RemoveDuplicateOrders",
+                "description": "Deduplicate by order_id",
+                "type": "Aggregate",
+                "inputs": ["AddComputedColumns"],
+                "groupBy": ["order_id"],
+                "aggregates": {
+                    "strategy": "first"
+                }
+            },
+            {
+                "name": "CleanCustomers",
+                "description": "Trim and standardize customer names",
+                "type": "DerivedColumn",
+                "inputs": ["SourceDimCustomers"],
+                "columns": {
+                    "customer_name": { "expression": "initCap(trim(customer_name))" },
+                    "region": { "expression": "trim(region)" },
+                    "country": { "expression": "trim(country)" }
+                }
+            },
+            {
+                "name": "EnrichProducts",
+                "description": "Add profit margin to products",
+                "type": "DerivedColumn",
+                "inputs": ["SourceDimProducts"],
+                "columns": {
+                    "unit_price": { "expression": "toDecimal(unit_price, 10, 2)" },
+                    "unit_cost": { "expression": "toDecimal(unit_cost, 10, 2)" },
+                    "profit_margin": { "expression": "round((toDecimal(unit_price,10,2) - toDecimal(unit_cost,10,2)) / toDecimal(unit_price,10,2), 4)" }
+                }
+            }
+        ],
+        "sinks": [
+            {
+                "name": "SinkFactSales",
+                "description": "Write to Lakehouse Delta table",
+                "type": "LakehouseTableSink",
+                "inputs": ["RemoveDuplicateOrders"],
+                "lakehouse": "SalesLakehouse",
+                "table": "fact_sales",
+                "format": "delta",
+                "writeMode": "overwrite",
+                "mergeSchema": true
+            },
+            {
+                "name": "SinkDimCustomers",
+                "type": "LakehouseTableSink",
+                "inputs": ["CleanCustomers"],
+                "lakehouse": "SalesLakehouse",
+                "table": "dim_customers",
+                "format": "delta",
+                "writeMode": "overwrite"
+            },
+            {
+                "name": "SinkDimProducts",
+                "type": "LakehouseTableSink",
+                "inputs": ["EnrichProducts"],
+                "lakehouse": "SalesLakehouse",
+                "table": "dim_products",
+                "format": "delta",
+                "writeMode": "overwrite"
+            }
+        ]
+    },
+    "policy": {
+        "timeout": "0.12:00:00",
+        "retry": 2,
+        "retryIntervalInSeconds": 300
+    }
+}

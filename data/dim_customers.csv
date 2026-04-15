@@ -1,0 +1,201 @@
+customer_id,customer_name,segment,region,country
+CUST-5000,Ahmed Williams,Enterprise,Asia Pacific,India
+CUST-5001,Sarah Garcia,Small Business,North America,United States
+CUST-5002,Carlos Tanaka,Government,North America,Mexico
+CUST-5003,Maria Martinez,Consumer,Europe,Germany
+CUST-5004,Ahmed Smith,Small Business,Europe,Germany
+CUST-5005,Sarah Kim,Enterprise,North America,Mexico
+CUST-5006,Robert Martinez,Government,Europe,Spain
+CUST-5007,Sarah Anderson,Enterprise,Middle East & Africa,South Africa
+CUST-5008,Maria Garcia,Enterprise,Latin America,Brazil
+CUST-5009,David Johnson,Consumer,Asia Pacific,India
+CUST-5010,David Martinez,Small Business,North America,United States
+CUST-5011,Sarah Tanaka,Government,North America,United States
+CUST-5012,David Mueller,Small Business,Latin America,Brazil
+CUST-5013,Chen Garcia,Enterprise,Latin America,Brazil
+CUST-5014,James Wilson,Government,Middle East & Africa,UAE
+CUST-5015,Ahmed Anderson,Corporate,North America,United States
+CUST-5016,Lisa Johnson,Corporate,Europe,Netherlands
+CUST-5017,Robert Chen,Consumer,Latin America,Brazil
+CUST-5018,Ahmed Anderson,Enterprise,Latin America,Argentina
+CUST-5019,Fatima Martinez,Government,Asia Pacific,India
+CUST-5020,Sarah Kim,Corporate,Latin America,Brazil
+CUST-5021,Fatima Williams,Consumer,North America,Mexico
+CUST-5022,James Brown,Enterprise,Asia Pacific,Japan
+CUST-5023,Robert Smith,Government,Middle East & Africa,Saudi Arabia
+CUST-5024,Maria Brown,Consumer,North America,United States
+CUST-5025,Maria Brown,Corporate,Europe,Netherlands
+CUST-5026,James Brown,Consumer,Middle East & Africa,Saudi Arabia
+CUST-5027,Yuki Brown,Government,Latin America,Colombia
+CUST-5028,Sarah Wilson,Small Business,Asia Pacific,South Korea
+CUST-5029,David Mueller,Small Business,Europe,France
+CUST-5030,Ahmed Anderson,Consumer,Latin America,Argentina
+CUST-5031,Yuki Brown,Consumer,North America,Canada
+CUST-5032,Sarah Williams,Small Business,North America,Mexico
+CUST-5033,Ahmed Garcia,Corporate,Europe,France
+CUST-5034,Robert Johnson,Government,Asia Pacific,South Korea
+CUST-5035,Raj Wilson,Government,Asia Pacific,Singapore
+CUST-5036,Chen Williams,Small Business,North America,Mexico
+CUST-5037,Michael Garcia,Consumer,North America,United States
+CUST-5038,Michael Kim,Government,Middle East & Africa,UAE
+CUST-5039,Sarah Wilson,Small Business,Europe,France
+CUST-5040,Michael Smith,Consumer,Middle East & Africa,South Africa
+CUST-5041,James Smith,Small Business,Latin America,Argentina
+CUST-5042,Robert Martinez,Enterprise,Europe,France
+CUST-5043,David Williams,Consumer,Middle East & Africa,Saudi Arabia
+CUST-5044,Ahmed Martinez,Corporate,North America,United States
+CUST-5045,Chen Singh,Government,Middle East & Africa,UAE
+CUST-5046,David Mueller,Consumer,Middle East & Africa,UAE
+CUST-5047,Ahmed Anderson,Consumer,Asia Pacific,South Korea
+CUST-5048,Hans Tanaka,Consumer,Asia Pacific,Australia
+CUST-5049,Ahmed Chen,Government,Asia Pacific,Singapore
+CUST-5050,Chen Mueller,Corporate,Europe,United Kingdom
+CUST-5051,Robert Martinez,Small Business,Latin America,Brazil
+CUST-5052,Chen Martinez,Corporate,Latin America,Colombia
+CUST-5053,Raj Martinez,Consumer,Asia Pacific,Australia
+CUST-5054,Chen Johnson,Corporate,Latin America,Brazil
+CUST-5055,Emma Kim,Corporate,Europe,Netherlands
+CUST-5056,Hans Tanaka,Enterprise,Europe,Germany
+CUST-5057,Chen Garcia,Small Business,Asia Pacific,South Korea
+CUST-5058,David Wilson,Government,Asia Pacific,Singapore
+CUST-5059,Maria Kim,Corporate,Asia Pacific,Japan
+CUST-5060,James Garcia,Government,Middle East & Africa,South Africa
+CUST-5061,Fatima Anderson,Small Business,Latin America,Argentina
+CUST-5062,Carlos Garcia,Enterprise,Latin America,Colombia
+CUST-5063,Michael Smith,Enterprise,Middle East & Africa,UAE
+CUST-5064,Ahmed Anderson,Government,North America,Mexico
+CUST-5065,David Garcia,Small Business,Europe,France
+CUST-5066,Hans Garcia,Small Business,Middle East & Africa,South Africa
+CUST-5067,Hans Chen,Small Business,Middle East & Africa,South Africa
+CUST-5068,Michael Williams,Corporate,Latin America,Colombia
+CUST-5069,Hans Chen,Corporate,Europe,Netherlands
+CUST-5070,Michael Chen,Government,Middle East & Africa,Saudi Arabia
+CUST-5071,Michael Tanaka,Enterprise,North America,Canada
+CUST-5072,Hans Singh,Enterprise,Middle East & Africa,Saudi Arabia
+CUST-5073,Hans Tanaka,Government,Latin America,Argentina
+CUST-5074,Robert Wilson,Consumer,Latin America,Colombia
+CUST-5075,Hans Wilson,Government,Asia Pacific,Singapore
+CUST-5076,Chen Anderson,Corporate,Asia Pacific,Japan
+CUST-5077,Raj Tanaka,Corporate,Asia Pacific,Australia
+CUST-5078,Sarah Johnson,Government,North America,United States
+CUST-5079,David Wilson,Government,North America,Canada
+CUST-5080,Lisa Chen,Corporate,Europe,Netherlands
+CUST-5081,Ahmed Anderson,Consumer,Europe,Germany
+CUST-5082,Robert Anderson,Government,Latin America,Brazil
+CUST-5083,Carlos Tanaka,Consumer,Latin America,Brazil
+CUST-5084,Raj Johnson,Government,Latin America,Brazil
+CUST-5085,Emma Anderson,Enterprise,Middle East & Africa,Saudi Arabia
+CUST-5086,Ahmed Williams,Enterprise,Middle East & Africa,Saudi Arabia
+CUST-5087,Ahmed Mueller,Enterprise,Middle East & Africa,South Africa
+CUST-5088,Raj Tanaka,Small Business,Latin America,Argentina
+CUST-5089,Hans Tanaka,Small Business,Middle East & Africa,South Africa
+CUST-5090,Fatima Kim,Corporate,Latin America,Brazil
+CUST-5091,Emma Williams,Consumer,Asia Pacific,South Korea
+CUST-5092,Sarah Chen,Corporate,Europe,United Kingdom
+CUST-5093,David Chen,Small Business,Europe,Germany
+CUST-5094,David Smith,Corporate,Middle East & Africa,South Africa
+CUST-5095,Ahmed Anderson,Government,Latin America,Argentina
+CUST-5096,David Johnson,Consumer,North America,Mexico
+CUST-5097,Raj Chen,Enterprise,Asia Pacific,South Korea
+CUST-5098,Fatima Williams,Government,Middle East & Africa,Saudi Arabia
+CUST-5099,Sarah Kim,Enterprise,Europe,Netherlands
+CUST-5100,David Singh,Enterprise,Latin America,Brazil
+CUST-5101,Ahmed Mueller,Government,Europe,Netherlands
+CUST-5102,Ahmed Chen,Government,Middle East & Africa,UAE
+CUST-5103,James Garcia,Enterprise,Middle East & Africa,Saudi Arabia
+CUST-5104,Robert Smith,Small Business,Europe,Netherlands
+CUST-5105,Sarah Johnson,Small Business,Latin America,Argentina
+CUST-5106,Michael Anderson,Enterprise,Asia Pacific,India
+CUST-5107,Lisa Smith,Government,Asia Pacific,Japan
+CUST-5108,Sarah Wilson,Consumer,North America,Canada
+CUST-5109,Sarah Tanaka,Consumer,North America,United States
+CUST-5110,Sarah Mueller,Enterprise,Middle East & Africa,UAE
+CUST-5111,Sarah Johnson,Small Business,North America,Mexico
+CUST-5112,Yuki Brown,Consumer,Asia Pacific,Australia
+CUST-5113,Maria Brown,Consumer,Europe,France
+CUST-5114,Hans Chen,Enterprise,Asia Pacific,Singapore
+CUST-5115,Yuki Martinez,Corporate,Europe,Germany
+CUST-5116,Raj Kim,Government,North America,Mexico
+CUST-5117,Raj Smith,Small Business,North America,Mexico
+CUST-5118,Hans Singh,Consumer,Middle East & Africa,South Africa
+CUST-5119,Emma Smith,Enterprise,Middle East & Africa,Saudi Arabia
+CUST-5120,David Singh,Enterprise,Latin America,Brazil
+CUST-5121,Robert Martinez,Government,Europe,Netherlands
+CUST-5122,Raj Williams,Enterprise,Asia Pacific,Singapore
+CUST-5123,Chen Martinez,Government,Latin America,Argentina
+CUST-5124,Chen Tanaka,Consumer,Asia Pacific,South Korea
+CUST-5125,Sarah Anderson,Enterprise,Asia Pacific,India
+CUST-5126,Hans Chen,Small Business,Middle East & Africa,Saudi Arabia
+CUST-5127,Chen Singh,Corporate,North America,Canada
+CUST-5128,Emma Anderson,Small Business,Latin America,Brazil
+CUST-5129,Ahmed Brown,Small Business,Asia Pacific,South Korea
+CUST-5130,Carlos Tanaka,Consumer,Middle East & Africa,UAE
+CUST-5131,Lisa Williams,Corporate,Europe,Netherlands
+CUST-5132,Fatima Johnson,Enterprise,Latin America,Colombia
+CUST-5133,Michael Tanaka,Enterprise,North America,United States
+CUST-5134,Hans Brown,Small Business,Europe,France
+CUST-5135,Carlos Singh,Enterprise,Latin America,Colombia
+CUST-5136,Emma Martinez,Enterprise,Middle East & Africa,South Africa
+CUST-5137,Michael Tanaka,Consumer,Asia Pacific,South Korea
+CUST-5138,Maria Martinez,Government,Europe,France
+CUST-5139,Sarah Martinez,Enterprise,Europe,United Kingdom
+CUST-5140,Raj Williams,Government,Asia Pacific,Singapore
+CUST-5141,Chen Tanaka,Small Business,Asia Pacific,Japan
+CUST-5142,Robert Kim,Consumer,Europe,France
+CUST-5143,Michael Smith,Consumer,Middle East & Africa,UAE
+CUST-5144,Fatima Mueller,Enterprise,Middle East & Africa,South Africa
+CUST-5145,Yuki Kim,Enterprise,North America,United States
+CUST-5146,Emma Mueller,Consumer,Latin America,Argentina
+CUST-5147,Maria Garcia,Enterprise,Asia Pacific,India
+CUST-5148,Yuki Wilson,Consumer,Latin America,Brazil
+CUST-5149,Raj Brown,Small Business,Europe,United Kingdom
+CUST-5150,Maria Williams,Enterprise,North America,United States
+CUST-5151,Raj Brown,Corporate,Middle East & Africa,Saudi Arabia
+CUST-5152,Lisa Johnson,Small Business,Middle East & Africa,South Africa
+CUST-5153,Michael Brown,Government,Middle East & Africa,South Africa
+CUST-5154,Fatima Garcia,Corporate,North America,Mexico
+CUST-5155,Hans Garcia,Corporate,Europe,France
+CUST-5156,Carlos Garcia,Corporate,Europe,United Kingdom
+CUST-5157,Lisa Martinez,Government,North America,Canada
+CUST-5158,James Tanaka,Small Business,Latin America,Argentina
+CUST-5159,Maria Wilson,Corporate,Asia Pacific,India
+CUST-5160,Hans Anderson,Corporate,Asia Pacific,Singapore
+CUST-5161,Carlos Tanaka,Corporate,Latin America,Brazil
+CUST-5162,Maria Smith,Corporate,Asia Pacific,Australia
+CUST-5163,Fatima Brown,Small Business,Asia Pacific,Singapore
+CUST-5164,Lisa Martinez,Small Business,Latin America,Brazil
+CUST-5165,Carlos Williams,Enterprise,Latin America,Argentina
+CUST-5166,Yuki Smith,Enterprise,Latin America,Brazil
+CUST-5167,Michael Smith,Consumer,Asia Pacific,Singapore
+CUST-5168,Yuki Smith,Small Business,Europe,Spain
+CUST-5169,Raj Anderson,Corporate,Middle East & Africa,UAE
+CUST-5170,Hans Johnson,Small Business,Latin America,Colombia
+CUST-5171,David Wilson,Enterprise,Europe,Spain
+CUST-5172,Emma Chen,Small Business,North America,Canada
+CUST-5173,Chen Mueller,Small Business,Asia Pacific,Japan
+CUST-5174,Lisa Kim,Enterprise,Latin America,Colombia
+CUST-5175,Lisa Garcia,Small Business,Middle East & Africa,UAE
+CUST-5176,Maria Anderson,Enterprise,Asia Pacific,South Korea
+CUST-5177,Hans Williams,Enterprise,Middle East & Africa,UAE
+CUST-5178,Sarah Williams,Small Business,Latin America,Brazil
+CUST-5179,Hans Johnson,Consumer,Middle East & Africa,South Africa
+CUST-5180,Carlos Mueller,Small Business,Europe,France
+CUST-5181,Lisa Garcia,Consumer,Latin America,Colombia
+CUST-5182,Fatima Mueller,Small Business,Middle East & Africa,UAE
+CUST-5183,Carlos Chen,Consumer,Middle East & Africa,UAE
+CUST-5184,Lisa Garcia,Corporate,Europe,Germany
+CUST-5185,Michael Williams,Small Business,Latin America,Colombia
+CUST-5186,Lisa Tanaka,Enterprise,Latin America,Argentina
+CUST-5187,David Tanaka,Government,Middle East & Africa,UAE
+CUST-5188,Ahmed Mueller,Consumer,Middle East & Africa,Saudi Arabia
+CUST-5189,Emma Anderson,Government,Asia Pacific,India
+CUST-5190,Michael Martinez,Small Business,Asia Pacific,Japan
+CUST-5191,Hans Johnson,Corporate,Middle East & Africa,Saudi Arabia
+CUST-5192,Lisa Singh,Small Business,Latin America,Colombia
+CUST-5193,David Johnson,Small Business,Middle East & Africa,Saudi Arabia
+CUST-5194,Yuki Chen,Corporate,Europe,United Kingdom
+CUST-5195,Emma Martinez,Enterprise,Latin America,Brazil
+CUST-5196,Hans Anderson,Corporate,Latin America,Argentina
+CUST-5197,Robert Williams,Government,Latin America,Brazil
+CUST-5198,Chen Johnson,Consumer,Asia Pacific,Japan
+CUST-5199,James Martinez,Corporate,Middle East & Africa,South Africa

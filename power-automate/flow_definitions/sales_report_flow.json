@@ -1,0 +1,183 @@
+{
+    "name": "Weekly_Sales_Report_Generator",
+    "description": "Automated weekly sales report: SharePoint → Excel → Teams notification",
+    "trigger": {
+        "type": "Recurrence",
+        "recurrence": {
+            "frequency": "Week",
+            "interval": 1,
+            "schedule": {
+                "weekDays": ["Monday"],
+                "hours": [8],
+                "minutes": [0]
+            },
+            "timeZone": "UTC"
+        }
+    },
+    "actions": {
+        "Get_Sales_Items": {
+            "type": "OpenApiConnection",
+            "inputs": {
+                "host": {
+                    "connectionName": "shared_sharepointonline",
+                    "operationId": "GetItems"
+                },
+                "parameters": {
+                    "dataset": "https://company.sharepoint.com/sites/sales",
+                    "table": "WeeklySalesData",
+                    "$filter": "OrderDate ge '@{addDays(utcNow(), -7)}'",
+                    "$orderby": "OrderDate desc",
+                    "$top": 5000
+                }
+            },
+            "runAfter": {}
+        },
+        "Initialize_TotalRevenue": {
+            "type": "InitializeVariable",
+            "inputs": {
+                "variables": [
+                    {
+                        "name": "TotalRevenue",
+                        "type": "float",
+                        "value": 0
+                    }
+                ]
+            },
+            "runAfter": {
+                "Get_Sales_Items": ["Succeeded"]
+            }
+        },
+        "Initialize_ReportRows": {
+            "type": "InitializeVariable",
+            "inputs": {
+                "variables": [
+                    {
+                        "name": "ReportRows",
+                        "type": "array",
+                        "value": []
+                    }
+                ]
+            },
+            "runAfter": {
+                "Initialize_TotalRevenue": ["Succeeded"]
+            }
+        },
+        "Process_Each_Order": {
+            "type": "Foreach",
+            "foreach": "@body('Get_Sales_Items')?['value']",
+            "actions": {
+                "Calculate_Line_Total": {
+                    "type": "Compose",
+                    "inputs": "@mul(items('Process_Each_Order')?['Quantity'], items('Process_Each_Order')?['UnitPrice'])"
+                },
+                "Append_To_Report": {
+                    "type": "AppendToArrayVariable",
+                    "inputs": {
+                        "name": "ReportRows",
+                        "value": {
+                            "OrderID": "@items('Process_Each_Order')?['OrderID']",
+                            "Customer": "@items('Process_Each_Order')?['CustomerName']",
+                            "Product": "@items('Process_Each_Order')?['Product']",
+                            "Quantity": "@items('Process_Each_Order')?['Quantity']",
+                            "Amount": "@outputs('Calculate_Line_Total')",
+                            "Region": "@items('Process_Each_Order')?['Region']",
+                            "Date": "@formatDateTime(items('Process_Each_Order')?['OrderDate'], 'yyyy-MM-dd')"
+                        }
+                    },
+                    "runAfter": {
+                        "Calculate_Line_Total": ["Succeeded"]
+                    }
+                },
+                "Update_Total": {
+                    "type": "IncrementVariable",
+                    "inputs": {
+                        "name": "TotalRevenue",
+                        "value": "@outputs('Calculate_Line_Total')"
+                    },
+                    "runAfter": {
+                        "Append_To_Report": ["Succeeded"]
+                    }
+                }
+            },
+            "runAfter": {
+                "Initialize_ReportRows": ["Succeeded"]
+            }
+        },
+        "Create_Excel_File": {
+            "type": "OpenApiConnection",
+            "inputs": {
+                "host": {
+                    "connectionName": "shared_excelonlinebusiness",
+                    "operationId": "CreateWorksheet"
+                },
+                "parameters": {
+                    "source": "me",
+                    "drive": "SharePoint",
+                    "file": "@concat('/sites/sales/Shared Documents/Reports/WeeklySalesReport_', formatDateTime(utcNow(), 'yyyy-MM-dd'), '.xlsx')"
+                }
+            },
+            "runAfter": {
+                "Process_Each_Order": ["Succeeded"]
+            }
+        },
+        "Add_Rows_To_Excel": {
+            "type": "OpenApiConnection",
+            "inputs": {
+                "host": {
+                    "connectionName": "shared_excelonlinebusiness",
+                    "operationId": "AddRowsToTable"
+                },
+                "parameters": {
+                    "source": "me",
+                    "drive": "SharePoint",
+                    "file": "@outputs('Create_Excel_File')?['body/Id']",
+                    "table": "SalesData",
+                    "rows": "@variables('ReportRows')"
+                }
+            },
+            "runAfter": {
+                "Create_Excel_File": ["Succeeded"]
+            }
+        },
+        "Post_To_Teams": {
+            "type": "OpenApiConnection",
+            "inputs": {
+                "host": {
+                    "connectionName": "shared_teams",
+                    "operationId": "PostMessageToChannel"
+                },
+                "parameters": {
+                    "groupId": "<team-id>",
+                    "channelId": "<channel-id>",
+                    "body": {
+                        "content": "<h3>📊 Weekly Sales Report Ready</h3><p><b>Period:</b> @{formatDateTime(addDays(utcNow(), -7), 'MMM dd')} - @{formatDateTime(utcNow(), 'MMM dd, yyyy')}</p><p><b>Total Orders:</b> @{length(body('Get_Sales_Items')?['value'])}</p><p><b>Total Revenue:</b> $@{formatNumber(variables('TotalRevenue'), 'N2')}</p><p>📎 <a href='@{outputs('Create_Excel_File')?['body/WebUrl']}'>Download Full Report</a></p>",
+                        "contentType": "html"
+                    }
+                }
+            },
+            "runAfter": {
+                "Add_Rows_To_Excel": ["Succeeded"]
+            }
+        },
+        "Send_Email_Notification": {
+            "type": "OpenApiConnection",
+            "inputs": {
+                "host": {
+                    "connectionName": "shared_office365",
+                    "operationId": "SendEmailV2"
+                },
+                "parameters": {
+                    "emailMessage": {
+                        "To": "sales-managers@company.com",
+                        "Subject": "Weekly Sales Report - @{formatDateTime(utcNow(), 'MMM dd, yyyy')}",
+                        "Body": "<h2>Weekly Sales Report</h2><p>Total Revenue: $@{formatNumber(variables('TotalRevenue'), 'N2')}</p><p>Total Orders: @{length(body('Get_Sales_Items')?['value'])}</p><p>Full report attached and available on SharePoint.</p>",
+                        "Importance": "Normal"
+                    }
+                }
+            },
+            "runAfter": {
+                "Post_To_Teams": ["Succeeded"]
+            }
+        }
+    }
+}

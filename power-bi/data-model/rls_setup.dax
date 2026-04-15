@@ -1,0 +1,71 @@
+// ============================================================
+// ROW-LEVEL SECURITY (RLS) CONFIGURATION
+// ============================================================
+
+// --- Static RLS Roles ---
+// Create these roles in Power BI Desktop → Modeling → Manage Roles
+
+// Role: Regional Manager - North America
+// Table: dim_customers
+// Filter:
+[region] = "North America"
+
+// Role: Regional Manager - Europe
+// Table: dim_customers
+// Filter:
+[region] = "Europe"
+
+// Role: Regional Manager - Asia Pacific
+// Table: dim_customers
+// Filter:
+[region] = "Asia Pacific"
+
+// Role: Regional Manager - Latin America
+// Table: dim_customers
+// Filter:
+[region] = "Latin America"
+
+// Role: Regional Manager - MEA
+// Table: dim_customers
+// Filter:
+[region] = "Middle East & Africa"
+
+
+// --- Dynamic RLS (Recommended for Production) ---
+// Uses a security mapping table instead of hardcoded roles
+
+// Step 1: Create SecurityMapping table in Power Query or Dataverse
+// Columns: UserEmail, Region, AccessLevel
+
+// Step 2: DAX Filter for dynamic role
+// Role: DynamicRegionSecurity
+// Table: SecurityMapping
+// Filter:
+[UserEmail] = USERPRINCIPALNAME()
+
+// Step 3: Relationship
+// SecurityMapping[Region] → dim_customers[region] (Many-to-Many, Single direction)
+
+// --- Object-Level Security (OLS) ---
+// Restricts visibility of specific columns/measures per role
+
+// In Tabular Editor or XMLA endpoint:
+// Role: Sales Rep
+// Table: fact_sales, Column: cost_amount → None (hidden)
+// Table: fact_sales, Column: profit → None (hidden)  
+// Table: dim_products, Column: unit_cost → None (hidden)
+
+// --- Testing RLS ---
+// 1. In Power BI Desktop: Modeling → View as → Select Role
+// 2. In Power BI Service: Dataset Settings → Security → Add members
+// 3. Use DAX query to validate:
+
+EVALUATE
+CALCULATETABLE(
+    SUMMARIZECOLUMNS(
+        dim_customers[region],
+        "Revenue", [Total Revenue]
+    ),
+    USERELATIONSHIP(fact_sales[order_date], dim_date[full_date])
+)
+// Expected: Only shows data for the role's assigned region

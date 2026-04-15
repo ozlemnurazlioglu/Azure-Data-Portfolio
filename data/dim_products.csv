@@ -1,0 +1,76 @@
+product_id,product_name,category,sub_category,unit_price,unit_cost
+PRD-1000,Laptops Pro,Electronics,Laptops,1282.46,461.69
+PRD-1001,Laptops Standard,Electronics,Laptops,557.31,244.82
+PRD-1002,Laptops Basic,Electronics,Laptops,1475.58,915.86
+PRD-1003,Smartphones Pro,Electronics,Smartphones,1785.44,686.99
+PRD-1004,Smartphones Standard,Electronics,Smartphones,849.62,307.49
+PRD-1005,Smartphones Basic,Electronics,Smartphones,445.09,245.75
+PRD-1006,Tablets Pro,Electronics,Tablets,62.81,26.98
+PRD-1007,Tablets Standard,Electronics,Tablets,1303.27,740.23
+PRD-1008,Tablets Basic,Electronics,Tablets,448.68,262.79
+PRD-1009,Monitors Pro,Electronics,Monitors,1620.77,571.48
+PRD-1010,Monitors Standard,Electronics,Monitors,1613.58,1015.35
+PRD-1011,Monitors Basic,Electronics,Monitors,687.1,283.22
+PRD-1012,Accessories Pro,Electronics,Accessories,1914.85,928.01
+PRD-1013,Accessories Standard,Electronics,Accessories,194.56,75.62
+PRD-1014,Accessories Basic,Electronics,Accessories,1696.51,1003.47
+PRD-1015,Desks Pro,Furniture,Desks,1616.19,1037.42
+PRD-1016,Desks Standard,Furniture,Desks,1077.09,796.23
+PRD-1017,Desks Basic,Furniture,Desks,763.28,435.69
+PRD-1018,Chairs Pro,Furniture,Chairs,1660.52,992.01
+PRD-1019,Chairs Standard,Furniture,Chairs,1724.8,1002.01
+PRD-1020,Chairs Basic,Furniture,Chairs,1412.1,520.12
+PRD-1021,Shelving Pro,Furniture,Shelving,463.52,215.89
+PRD-1022,Shelving Standard,Furniture,Shelving,168.79,74.79
+PRD-1023,Shelving Basic,Furniture,Shelving,210.99,97.31
+PRD-1024,Tables Pro,Furniture,Tables,1275.01,632.32
+PRD-1025,Tables Standard,Furniture,Tables,746.66,323.9
+PRD-1026,Tables Basic,Furniture,Tables,541.29,392.25
+PRD-1027,Cabinets Pro,Furniture,Cabinets,1299.59,771.5
+PRD-1028,Cabinets Standard,Furniture,Cabinets,350.57,224.94
+PRD-1029,Cabinets Basic,Furniture,Cabinets,335.17,168.18
+PRD-1030,Paper Pro,Office Supplies,Paper,1979.15,1199.36
+PRD-1031,Paper Standard,Office Supplies,Paper,1118.33,697.67
+PRD-1032,Paper Basic,Office Supplies,Paper,1687.28,1114.28
+PRD-1033,Pens Pro,Office Supplies,Pens,465.81,169.01
+PRD-1034,Pens Standard,Office Supplies,Pens,637.75,291.51
+PRD-1035,Pens Basic,Office Supplies,Pens,429.86,312.58
+PRD-1036,Binders Pro,Office Supplies,Binders,1753.97,834.66
+PRD-1037,Binders Standard,Office Supplies,Binders,1314.32,668.01
+PRD-1038,Binders Basic,Office Supplies,Binders,1829.95,976.35
+PRD-1039,Labels Pro,Office Supplies,Labels,537.11,240.97
+PRD-1040,Labels Standard,Office Supplies,Labels,1127.12,512.95
+PRD-1041,Labels Basic,Office Supplies,Labels,1173.33,832.04
+PRD-1042,Envelopes Pro,Office Supplies,Envelopes,804.81,352.29
+PRD-1043,Envelopes Standard,Office Supplies,Envelopes,1995.1,1104.91
+PRD-1044,Envelopes Basic,Office Supplies,Envelopes,190.91,70.42
+PRD-1045,Shirts Pro,Clothing,Shirts,228.2,137.14
+PRD-1046,Shirts Standard,Clothing,Shirts,1586.24,823.04
+PRD-1047,Shirts Basic,Clothing,Shirts,136.42,68.57
+PRD-1048,Pants Pro,Clothing,Pants,1992.28,1118.96
+PRD-1049,Pants Standard,Clothing,Pants,1942.45,1348.67
+PRD-1050,Pants Basic,Clothing,Pants,32.85,20.97
+PRD-1051,Jackets Pro,Clothing,Jackets,1366.6,771.84
+PRD-1052,Jackets Standard,Clothing,Jackets,540.98,328.04
+PRD-1053,Jackets Basic,Clothing,Jackets,231.99,121.54
+PRD-1054,Shoes Pro,Clothing,Shoes,912.91,667.82
+PRD-1055,Shoes Standard,Clothing,Shoes,1752.95,798.22
+PRD-1056,Shoes Basic,Clothing,Shoes,1006.17,424.06
+PRD-1057,Accessories Pro,Clothing,Accessories,1826.13,1275.02
+PRD-1058,Accessories Standard,Clothing,Accessories,603.91,365.72
+PRD-1059,Accessories Basic,Clothing,Accessories,1221.85,502.35
+PRD-1060,Snacks Pro,Food & Beverage,Snacks,1527.4,864.13
+PRD-1061,Snacks Standard,Food & Beverage,Snacks,1559.47,876.64
+PRD-1062,Snacks Basic,Food & Beverage,Snacks,11.14,5.34
+PRD-1063,Beverages Pro,Food & Beverage,Beverages,48.76,35.19
+PRD-1064,Beverages Standard,Food & Beverage,Beverages,1758.66,1200.58
+PRD-1065,Beverages Basic,Food & Beverage,Beverages,621.95,232.09
+PRD-1066,Coffee Pro,Food & Beverage,Coffee,1757.24,1280.64
+PRD-1067,Coffee Standard,Food & Beverage,Coffee,180.45,98.24
+PRD-1068,Coffee Basic,Food & Beverage,Coffee,147.73,96.65
+PRD-1069,Tea Pro,Food & Beverage,Tea,1534.01,615.69
+PRD-1070,Tea Standard,Food & Beverage,Tea,955.81,544.74
+PRD-1071,Tea Basic,Food & Beverage,Tea,537.46,375.67
+PRD-1072,Catering Pro,Food & Beverage,Catering,852.04,370.4
+PRD-1073,Catering Standard,Food & Beverage,Catering,1083.2,695.38
+PRD-1074,Catering Basic,Food & Beverage,Catering,410.29,194.76

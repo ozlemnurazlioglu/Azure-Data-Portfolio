@@ -1,0 +1,196 @@
+{
+    "name": "PO-Approval-Workflow",
+    "displayName": "Purchase Order Approval Workflow",
+    "description": "Multi-level approval flow triggered when a new Purchase Order is created in SharePoint. Routes to Manager only for orders under $5,000, and Manager + Director for orders above.",
+    "state": "Enabled",
+    "definition": {
+        "triggers": {
+            "When_a_new_item_is_created": {
+                "type": "ApiConnection",
+                "inputs": {
+                    "host": {
+                        "connection": { "name": "@parameters('$connections')['shared_sharepointonline']['connectionId']" },
+                        "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline" }
+                    },
+                    "method": "get",
+                    "path": "/datasets/@{encodeURIComponent('https://contoso.sharepoint.com/sites/Procurement')}/tables/@{encodeURIComponent('Purchase Orders')}/onnewitems"
+                },
+                "recurrence": { "frequency": "Minute", "interval": 1 }
+            }
+        },
+        "actions": {
+            "Initialize_ApprovalStatus": {
+                "type": "InitializeVariable",
+                "inputs": {
+                    "variables": [
+                        { "name": "varApprovalStatus", "type": "string", "value": "Pending" }
+                    ]
+                },
+                "runAfter": {}
+            },
+            "Initialize_ApproverComments": {
+                "type": "InitializeVariable",
+                "inputs": {
+                    "variables": [
+                        { "name": "varApproverComments", "type": "string", "value": "" }
+                    ]
+                },
+                "runAfter": { "Initialize_ApprovalStatus": ["Succeeded"] }
+            },
+            "Get_Requester_Manager": {
+                "type": "ApiConnection",
+                "inputs": {
+                    "host": {
+                        "connection": { "name": "@parameters('$connections')['shared_office365users']['connectionId']" },
+                        "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_office365users" }
+                    },
+                    "method": "get",
+                    "path": "/users/@{triggerOutputs()?['body/Requester/Email']}/manager"
+                },
+                "runAfter": { "Initialize_ApproverComments": ["Succeeded"] }
+            },
+            "Condition_Amount_Over_5000": {
+                "type": "If",
+                "expression": {
+                    "greater": ["@triggerOutputs()?['body/TotalAmount']", 5000]
+                },
+                "runAfter": { "Get_Requester_Manager": ["Succeeded"] },
+                "actions": {
+                    "Start_Multi_Level_Approval": {
+                        "type": "ApiConnection",
+                        "inputs": {
+                            "host": {
+                                "connection": { "name": "@parameters('$connections')['shared_approvals']['connectionId']" },
+                                "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_approvals" }
+                            },
+                            "method": "post",
+                            "path": "/v2/approvals",
+                            "body": {
+                                "title": "PO Approval Required: @{triggerOutputs()?['body/PONumber']} ($@{triggerOutputs()?['body/TotalAmount']})",
+                                "assignedTo": "@{body('Get_Requester_Manager')?['mail']};director@contoso.com",
+                                "details": "## Purchase Order Details\n\n| Field | Value |\n|-------|-------|\n| **PO Number** | @{triggerOutputs()?['body/PONumber']} |\n| **Requester** | @{triggerOutputs()?['body/Requester/DisplayName']} |\n| **Vendor** | @{triggerOutputs()?['body/VendorName']} |\n| **Amount** | $@{triggerOutputs()?['body/TotalAmount']} |\n| **Description** | @{triggerOutputs()?['body/Description']} |\n\n⚠️ This order exceeds $5,000 and requires dual approval.",
+                                "itemLink": "https://contoso.sharepoint.com/sites/Procurement/Lists/PurchaseOrders/DispForm.aspx?ID=@{triggerOutputs()?['body/ID']}",
+                                "itemLinkDescription": "View PO in SharePoint",
+                                "approvalType": "CustomResponse",
+                                "responseOptions": ["Approve", "Reject", "Request More Info"],
+                                "enableNotifications": true
+                            }
+                        }
+                    },
+                    "Set_Status_MultiLevel": {
+                        "type": "SetVariable",
+                        "inputs": {
+                            "name": "varApprovalStatus",
+                            "value": "@{if(equals(body('Start_Multi_Level_Approval')?['outcome'], 'Approve'), 'Approved', 'Rejected')}"
+                        },
+                        "runAfter": { "Start_Multi_Level_Approval": ["Succeeded"] }
+                    },
+                    "Set_Comments_MultiLevel": {
+                        "type": "SetVariable",
+                        "inputs": {
+                            "name": "varApproverComments",
+                            "value": "@{body('Start_Multi_Level_Approval')?['responses'][0]?['comments']}"
+                        },
+                        "runAfter": { "Set_Status_MultiLevel": ["Succeeded"] }
+                    }
+                },
+                "else": {
+                    "actions": {
+                        "Start_Single_Approval": {
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "host": {
+                                    "connection": { "name": "@parameters('$connections')['shared_approvals']['connectionId']" },
+                                    "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_approvals" }
+                                },
+                                "method": "post",
+                                "path": "/v2/approvals",
+                                "body": {
+                                    "title": "PO Approval: @{triggerOutputs()?['body/PONumber']} ($@{triggerOutputs()?['body/TotalAmount']})",
+                                    "assignedTo": "@{body('Get_Requester_Manager')?['mail']}",
+                                    "details": "## Purchase Order Details\n\n| Field | Value |\n|-------|-------|\n| **PO Number** | @{triggerOutputs()?['body/PONumber']} |\n| **Requester** | @{triggerOutputs()?['body/Requester/DisplayName']} |\n| **Vendor** | @{triggerOutputs()?['body/VendorName']} |\n| **Amount** | $@{triggerOutputs()?['body/TotalAmount']} |\n| **Description** | @{triggerOutputs()?['body/Description']} |",
+                                    "itemLink": "https://contoso.sharepoint.com/sites/Procurement/Lists/PurchaseOrders/DispForm.aspx?ID=@{triggerOutputs()?['body/ID']}",
+                                    "approvalType": "Approve/Reject - First to respond",
+                                    "enableNotifications": true
+                                }
+                            }
+                        },
+                        "Set_Status_Single": {
+                            "type": "SetVariable",
+                            "inputs": {
+                                "name": "varApprovalStatus",
+                                "value": "@{if(equals(body('Start_Single_Approval')?['outcome'], 'Approve'), 'Approved', 'Rejected')}"
+                            },
+                            "runAfter": { "Start_Single_Approval": ["Succeeded"] }
+                        },
+                        "Set_Comments_Single": {
+                            "type": "SetVariable",
+                            "inputs": {
+                                "name": "varApproverComments",
+                                "value": "@{body('Start_Single_Approval')?['responses'][0]?['comments']}"
+                            },
+                            "runAfter": { "Set_Status_Single": ["Succeeded"] }
+                        }
+                    }
+                }
+            },
+            "Update_SharePoint_Status": {
+                "type": "ApiConnection",
+                "inputs": {
+                    "host": {
+                        "connection": { "name": "@parameters('$connections')['shared_sharepointonline']['connectionId']" },
+                        "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline" }
+                    },
+                    "method": "patch",
+                    "path": "/datasets/@{encodeURIComponent('https://contoso.sharepoint.com/sites/Procurement')}/tables/@{encodeURIComponent('Purchase Orders')}/items/@{triggerOutputs()?['body/ID']}",
+                    "body": {
+                        "Status": "@{variables('varApprovalStatus')}",
+                        "ApproverComments": "@{variables('varApproverComments')}",
+                        "ApprovalDate": "@{utcNow()}"
+                    }
+                },
+                "runAfter": { "Condition_Amount_Over_5000": ["Succeeded"] }
+            },
+            "Post_Result_To_Teams": {
+                "type": "ApiConnection",
+                "inputs": {
+                    "host": {
+                        "connection": { "name": "@parameters('$connections')['shared_teams']['connectionId']" },
+                        "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_teams" }
+                    },
+                    "method": "post",
+                    "path": "/v3/beta/teams/@{encodeURIComponent('procurement-team-id')}/channels/@{encodeURIComponent('Purchase Orders')}/messages",
+                    "body": {
+                        "content": "<at>General</at><br/><b>PO @{triggerOutputs()?['body/PONumber']}</b> — @{variables('varApprovalStatus')}<br/>Amount: $@{triggerOutputs()?['body/TotalAmount']}<br/>Vendor: @{triggerOutputs()?['body/VendorName']}<br/>Comments: @{variables('varApproverComments')}"
+                    }
+                },
+                "runAfter": { "Update_SharePoint_Status": ["Succeeded"] }
+            },
+            "Send_Notification_Email": {
+                "type": "ApiConnection",
+                "inputs": {
+                    "host": {
+                        "connection": { "name": "@parameters('$connections')['shared_office365']['connectionId']" },
+                        "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_office365" }
+                    },
+                    "method": "post",
+                    "path": "/v2/Mail",
+                    "body": {
+                        "To": "@{triggerOutputs()?['body/Requester/Email']}",
+                        "Subject": "PO @{triggerOutputs()?['body/PONumber']} — @{variables('varApprovalStatus')}",
+                        "Body": "<h2>Purchase Order Update</h2><p>Your purchase order <b>@{triggerOutputs()?['body/PONumber']}</b> for <b>$@{triggerOutputs()?['body/TotalAmount']}</b> has been <b>@{variables('varApprovalStatus')}</b>.</p><p><b>Approver comments:</b> @{variables('varApproverComments')}</p>",
+                        "Importance": "High"
+                    }
+                },
+                "runAfter": { "Post_Result_To_Teams": ["Succeeded"] }
+            }
+        }
+    },
+    "connectionReferences": {
+        "shared_sharepointonline": { "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline" } },
+        "shared_office365users": { "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_office365users" } },
+        "shared_approvals": { "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_approvals" } },
+        "shared_teams": { "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_teams" } },
+        "shared_office365": { "api": { "id": "/providers/Microsoft.PowerApps/apis/shared_office365" } }
+    }
+}

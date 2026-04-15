@@ -1,0 +1,149 @@
+{
+    "appName": "Inventory Management System",
+    "appType": "CanvasApp",
+    "platform": "Power Apps",
+    "version": "1.0.0",
+    "layout": {
+        "primary": { "width": 1366, "height": 768, "device": "Tablet" },
+        "secondary": { "width": 640, "height": 1136, "device": "Phone" }
+    },
+    "dataSources": [
+        {
+            "name": "Products",
+            "type": "SharePoint List",
+            "siteUrl": "https://contoso.sharepoint.com/sites/InventoryTeam",
+            "listName": "Products",
+            "columns": [
+                { "name": "ProductName", "type": "SingleLineText", "required": true },
+                { "name": "Category", "type": "Choice", "values": ["Electronics", "Furniture", "Office Supplies", "Clothing", "Food & Beverage"], "required": true },
+                { "name": "SKU", "type": "SingleLineText", "formula": "SKU- & Text(CountRows(Products) + 1, '0000')" },
+                { "name": "QuantityInStock", "type": "Number", "required": true },
+                { "name": "ReorderLevel", "type": "Number", "required": true },
+                { "name": "UnitPrice", "type": "Currency", "required": true },
+                { "name": "Supplier", "type": "Lookup", "lookupList": "Suppliers" },
+                { "name": "Location", "type": "Choice", "values": ["Warehouse A", "Warehouse B", "Warehouse C"] },
+                { "name": "ProductImage", "type": "Image" },
+                { "name": "Notes", "type": "MultiLineText" },
+                { "name": "CreatedBy", "type": "SingleLineText", "auto": true },
+                { "name": "CreatedDate", "type": "DateTime", "auto": true },
+                { "name": "ModifiedBy", "type": "SingleLineText", "auto": true },
+                { "name": "ModifiedDate", "type": "DateTime", "auto": true }
+            ]
+        },
+        {
+            "name": "Suppliers",
+            "type": "SharePoint List",
+            "listName": "Suppliers",
+            "columns": [
+                { "name": "SupplierName", "type": "SingleLineText" },
+                { "name": "ContactPerson", "type": "SingleLineText" },
+                { "name": "Email", "type": "SingleLineText" },
+                { "name": "Phone", "type": "SingleLineText" },
+                { "name": "LeadTimeDays", "type": "Number" }
+            ]
+        },
+        {
+            "name": "StockMovements",
+            "type": "SharePoint List",
+            "listName": "StockMovements",
+            "columns": [
+                { "name": "ProductID", "type": "Lookup", "lookupList": "Products" },
+                { "name": "MovementType", "type": "Choice", "values": ["In", "Out", "Adjustment"] },
+                { "name": "Quantity", "type": "Number" },
+                { "name": "PreviousStock", "type": "Number" },
+                { "name": "NewStock", "type": "Number" },
+                { "name": "Reason", "type": "SingleLineText" },
+                { "name": "PerformedBy", "type": "Person" },
+                { "name": "MovementDate", "type": "DateTime" }
+            ]
+        }
+    ],
+    "screens": [
+        {
+            "name": "HomeScreen",
+            "description": "Main landing with navigation and KPI summary",
+            "controls": [
+                { "type": "Label", "name": "lblAppTitle", "text": "Inventory Management", "fontSize": 28, "fontWeight": "Bold" },
+                { "type": "Label", "name": "lblGreeting", "text": "Welcome, & User().FullName", "fontSize": 14 },
+                { "type": "Label", "name": "lblTotalProducts", "text": "CountRows(Products)", "kpiTitle": "Total Products" },
+                { "type": "Label", "name": "lblLowStock", "text": "CountIf(Products, QuantityInStock <= ReorderLevel)", "kpiTitle": "Low Stock Alerts", "color": "Color.Red" },
+                { "type": "Label", "name": "lblRecentUpdates", "text": "CountIf(Products, ModifiedDate >= DateAdd(Today(), -7, TimeUnit.Days))", "kpiTitle": "Updated This Week" },
+                { "type": "Button", "name": "btnProducts", "text": "Product Gallery", "navigateTo": "ProductGalleryScreen" },
+                { "type": "Button", "name": "btnAddNew", "text": "Add Product", "navigateTo": "AddEditScreen" },
+                { "type": "Button", "name": "btnDashboard", "text": "Dashboard", "navigateTo": "DashboardScreen" }
+            ]
+        },
+        {
+            "name": "ProductGalleryScreen",
+            "description": "Searchable scrollable list with sort, filter, and stock indicators",
+            "controls": [
+                { "type": "TextInput", "name": "SearchInput", "placeholder": "Search products..." },
+                { "type": "Dropdown", "name": "CategoryFilter", "items": ["All", "Electronics", "Furniture", "Office Supplies", "Clothing", "Food & Beverage"] },
+                { "type": "Dropdown", "name": "SortDropdown", "items": ["Name", "Stock", "Price", "Updated"] },
+                {
+                    "type": "Gallery",
+                    "name": "ProductGallery",
+                    "templateSize": 80,
+                    "items": "Sort(Filter(Products, SearchInput.Text in ProductName || SearchInput.Text in SKU, If(!IsBlank(CategoryFilter.Selected.Value) && CategoryFilter.Selected.Value <> 'All', Category = CategoryFilter.Selected.Value, true)), Switch(SortDropdown.Selected.Value, 'Name', ProductName, 'Stock', QuantityInStock, 'Price', UnitPrice, 'Updated', ModifiedDate), SortOrder.Ascending)",
+                    "childControls": [
+                        { "type": "Label", "name": "lblName", "text": "ThisItem.ProductName" },
+                        { "type": "Label", "name": "lblSKU", "text": "ThisItem.SKU" },
+                        { "type": "Label", "name": "lblQty", "text": "ThisItem.QuantityInStock & ' units'" },
+                        { "type": "Icon", "name": "icoStockStatus", "fill": "If(ThisItem.QuantityInStock <= ThisItem.ReorderLevel * 0.5, Color.Red, If(ThisItem.QuantityInStock <= ThisItem.ReorderLevel, Color.Orange, Color.Green))" },
+                        { "type": "Button", "name": "btnEdit", "text": "Edit", "onSelect": "Navigate(AddEditScreen); Set(varSelectedProduct, ThisItem)" },
+                        { "type": "Button", "name": "btnDelete", "text": "Delete", "onSelect": "If(Confirm('Delete ' & ThisItem.ProductName & '?'), Remove(Products, ThisItem); Notify('Deleted', NotificationType.Warning))" }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "AddEditScreen",
+            "description": "Form for creating or editing product records",
+            "controls": [
+                { "type": "EditForm", "name": "ProductForm", "dataSource": "Products", "mode": "FormMode.New | FormMode.Edit" },
+                { "type": "TextInput", "name": "txtProductName", "field": "ProductName" },
+                { "type": "Dropdown", "name": "ddCategory", "field": "Category" },
+                { "type": "TextInput", "name": "txtQuantity", "field": "QuantityInStock", "format": "Number" },
+                { "type": "TextInput", "name": "txtReorderLevel", "field": "ReorderLevel", "format": "Number" },
+                { "type": "TextInput", "name": "txtUnitPrice", "field": "UnitPrice", "format": "Currency" },
+                { "type": "Dropdown", "name": "ddSupplier", "field": "Supplier" },
+                { "type": "Dropdown", "name": "ddLocation", "field": "Location" },
+                { "type": "AddMediaButton", "name": "btnPhoto", "field": "ProductImage" },
+                { "type": "TextInput", "name": "txtNotes", "field": "Notes", "mode": "Multiline" },
+                { "type": "Button", "name": "btnSave", "text": "Save", "onSelect": "SubmitForm(ProductForm); Notify('Product saved!', NotificationType.Success); Navigate(ProductGalleryScreen)" },
+                { "type": "Button", "name": "btnCancel", "text": "Cancel", "onSelect": "ResetForm(ProductForm); Back()" }
+            ]
+        },
+        {
+            "name": "DashboardScreen",
+            "description": "Visual KPIs and charts for inventory overview",
+            "controls": [
+                { "type": "Label", "name": "lblInventoryValue", "text": "Text(Sum(Products, QuantityInStock * UnitPrice), '$#,##0.00')", "kpiTitle": "Total Inventory Value" },
+                { "type": "Label", "name": "lblLowStockCount", "text": "CountIf(Products, QuantityInStock <= ReorderLevel)", "kpiTitle": "Below Reorder Level" },
+                { "type": "PieChart", "name": "chtCategory", "items": "GroupBy(Products, 'Category', 'CatGroup')", "label": "Category", "value": "CountRows(CatGroup)" },
+                { "type": "BarChart", "name": "chtTopProducts", "items": "TopN(10, Products, UnitPrice * QuantityInStock, Descending)", "label": "ProductName", "value": "UnitPrice * QuantityInStock" },
+                { "type": "Gallery", "name": "galLowStock", "items": "Filter(Products, QuantityInStock <= ReorderLevel)", "title": "Low Stock Items" }
+            ]
+        }
+    ],
+    "theme": {
+        "primaryColor": "#0078D4",
+        "backgroundColor": "#F5F5F5",
+        "headerColor": "#003366",
+        "accentColor": "#00B7C3",
+        "fontFamily": "Segoe UI"
+    },
+    "integrations": [
+        {
+            "type": "PowerAutomate",
+            "flowName": "LowStockReorderAlert",
+            "trigger": "When QuantityInStock <= ReorderLevel after Patch()",
+            "actions": ["Send email to procurement", "Create Purchase Request in SharePoint", "Post adaptive card in Teams"]
+        }
+    ],
+    "security": {
+        "sharing": "Security Group: InventoryManagers",
+        "dataPermissions": "SharePoint list-level permissions",
+        "teamsIntegration": "Pinned as tab in Inventory Management channel"
+    }
+}

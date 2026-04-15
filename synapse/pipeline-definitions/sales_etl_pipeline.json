@@ -1,0 +1,210 @@
+{
+    "name": "PL_Sales_ETL_Daily",
+    "properties": {
+        "description": "Daily ETL pipeline: Ingest CSV from source → Transform → Load to Data Lake → Refresh Power BI",
+        "activities": [
+            {
+                "name": "Copy_Raw_Sales_To_DataLake",
+                "type": "Copy",
+                "description": "Ingest raw CSV files from source system to Data Lake raw zone",
+                "inputs": [
+                    {
+                        "referenceName": "DS_Source_SalesCSV",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "DS_ADLS_Raw_CSV",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "typeProperties": {
+                    "source": {
+                        "type": "DelimitedTextSource",
+                        "storeSettings": {
+                            "type": "HttpReadSettings"
+                        }
+                    },
+                    "sink": {
+                        "type": "DelimitedTextSink",
+                        "storeSettings": {
+                            "type": "AzureBlobFSWriteSettings"
+                        }
+                    }
+                },
+                "policy": {
+                    "timeout": "00:30:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 60
+                }
+            },
+            {
+                "name": "Validate_Raw_Data",
+                "type": "SqlServerStoredProcedure",
+                "description": "Run data quality checks on raw ingested data",
+                "dependsOn": [
+                    {
+                        "activity": "Copy_Raw_Sales_To_DataLake",
+                        "dependencyConditions": ["Succeeded"]
+                    }
+                ],
+                "typeProperties": {
+                    "storedProcedureName": "sales.usp_validate_raw_data",
+                    "storedProcedureParameters": {
+                        "execution_date": {
+                            "value": {
+                                "value": "@pipeline().parameters.execution_date",
+                                "type": "Expression"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Transform_CSV_To_Parquet",
+                "type": "SynapseNotebook",
+                "description": "Transform raw CSV to optimized Parquet with enrichment",
+                "dependsOn": [
+                    {
+                        "activity": "Validate_Raw_Data",
+                        "dependencyConditions": ["Succeeded"]
+                    }
+                ],
+                "typeProperties": {
+                    "notebook": {
+                        "referenceName": "NB_Transform_Sales",
+                        "type": "NotebookReference"
+                    },
+                    "parameters": {
+                        "source_path": {
+                            "value": "abfss://sales-data@<storage>.dfs.core.windows.net/raw/",
+                            "type": "string"
+                        },
+                        "target_path": {
+                            "value": "abfss://sales-data@<storage>.dfs.core.windows.net/curated/",
+                            "type": "string"
+                        },
+                        "execution_date": {
+                            "value": {
+                                "value": "@pipeline().parameters.execution_date",
+                                "type": "Expression"
+                            }
+                        }
+                    },
+                    "sparkPool": {
+                        "referenceName": "SparkPoolSmall",
+                        "type": "BigDataPoolReference"
+                    }
+                }
+            },
+            {
+                "name": "Create_Curated_Views",
+                "type": "SqlPoolStoredProcedure",
+                "description": "Refresh materialized views in serverless SQL pool",
+                "dependsOn": [
+                    {
+                        "activity": "Transform_CSV_To_Parquet",
+                        "dependencyConditions": ["Succeeded"]
+                    }
+                ],
+                "typeProperties": {
+                    "sqlPool": {
+                        "referenceName": "Built-in",
+                        "type": "SqlPoolReference"
+                    },
+                    "storedProcedureName": "sales.usp_refresh_curated_views"
+                }
+            },
+            {
+                "name": "Refresh_PowerBI_Dataset",
+                "type": "WebActivity",
+                "description": "Trigger Power BI dataset refresh via REST API",
+                "dependsOn": [
+                    {
+                        "activity": "Create_Curated_Views",
+                        "dependencyConditions": ["Succeeded"]
+                    }
+                ],
+                "typeProperties": {
+                    "url": "https://api.powerbi.com/v1.0/myorg/groups/<workspace-id>/datasets/<dataset-id>/refreshes",
+                    "method": "POST",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "authentication": {
+                        "type": "MSI",
+                        "resource": "https://analysis.windows.net/powerbi/api"
+                    },
+                    "body": {
+                        "notifyOption": "MailOnFailure"
+                    }
+                }
+            },
+            {
+                "name": "Send_Success_Notification",
+                "type": "WebActivity",
+                "description": "Send Teams notification on pipeline success",
+                "dependsOn": [
+                    {
+                        "activity": "Refresh_PowerBI_Dataset",
+                        "dependencyConditions": ["Succeeded"]
+                    }
+                ],
+                "typeProperties": {
+                    "url": "<teams-webhook-url>",
+                    "method": "POST",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": {
+                        "value": "@concat('{\"text\": \"✅ Sales ETL Pipeline completed successfully at ', utcnow(), '. Records processed: ', activity('Copy_Raw_Sales_To_DataLake').output.rowsCopied, '\"}')",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "On_Failure_Alert",
+                "type": "WebActivity",
+                "description": "Send alert on any pipeline failure",
+                "dependsOn": [
+                    {
+                        "activity": "Transform_CSV_To_Parquet",
+                        "dependencyConditions": ["Failed"]
+                    }
+                ],
+                "typeProperties": {
+                    "url": "<teams-webhook-url>",
+                    "method": "POST",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": {
+                        "value": "@concat('{\"text\": \"❌ Sales ETL Pipeline FAILED at ', utcnow(), '. Error: ', activity('Transform_CSV_To_Parquet').error.message, '\"}')",
+                        "type": "Expression"
+                    }
+                }
+            }
+        ],
+        "parameters": {
+            "execution_date": {
+                "type": "string",
+                "defaultValue": "@utcnow()"
+            }
+        },
+        "annotations": ["Production", "Daily", "Sales"],
+        "concurrency": 1
+    },
+    "trigger": {
+        "name": "TR_Daily_0600UTC",
+        "type": "ScheduleTrigger",
+        "typeProperties": {
+            "recurrence": {
+                "frequency": "Day",
+                "interval": 1,
+                "startTime": "2025-01-01T06:00:00Z",
+                "timeZone": "UTC"
+            }
+        }
+    }
+}

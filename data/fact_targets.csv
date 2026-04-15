@@ -1,0 +1,751 @@
+year,month,region,category,target_revenue,target_orders
+2023,1,North America,Electronics,93121.53,489
+2023,1,North America,Furniture,246851.39,533
+2023,1,North America,Office Supplies,117821.62,116
+2023,1,North America,Clothing,215793.51,129
+2023,1,North America,Food & Beverage,253604.52,588
+2023,1,Europe,Electronics,105348.63,423
+2023,1,Europe,Furniture,139938.87,583
+2023,1,Europe,Office Supplies,85411.94,541
+2023,1,Europe,Clothing,121152.74,324
+2023,1,Europe,Food & Beverage,152393.29,372
+2023,1,Asia Pacific,Electronics,281626.71,522
+2023,1,Asia Pacific,Furniture,260948.75,207
+2023,1,Asia Pacific,Office Supplies,130241.19,300
+2023,1,Asia Pacific,Clothing,149213.56,355
+2023,1,Asia Pacific,Food & Beverage,169840.67,367
+2023,1,Latin America,Electronics,156986.58,560
+2023,1,Latin America,Furniture,280072.42,198
+2023,1,Latin America,Office Supplies,249016.11,362
+2023,1,Latin America,Clothing,183341.26,544
+2023,1,Latin America,Food & Beverage,152482.2,460
+2023,1,Middle East & Africa,Electronics,186117.55,562
+2023,1,Middle East & Africa,Furniture,146517.74,154
+2023,1,Middle East & Africa,Office Supplies,200785.32,590
+2023,1,Middle East & Africa,Clothing,229128.57,587
+2023,1,Middle East & Africa,Food & Beverage,76315.03,198
+2023,2,North America,Electronics,96302.08,410
+2023,2,North America,Furniture,213216.31,218
+2023,2,North America,Office Supplies,243088.61,502
+2023,2,North America,Clothing,96367.51,467
+2023,2,North America,Food & Beverage,152941.4,527
+2023,2,Europe,Electronics,168405.22,188
+2023,2,Europe,Furniture,90411.07,447
+2023,2,Europe,Office Supplies,150483.36,354
+2023,2,Europe,Clothing,87078.84,181
+2023,2,Europe,Food & Beverage,103610.4,185
+2023,2,Asia Pacific,Electronics,262062.69,534
+2023,2,Asia Pacific,Furniture,208745.44,103
+2023,2,Asia Pacific,Office Supplies,165267.62,445
+2023,2,Asia Pacific,Clothing,233312.91,370
+2023,2,Asia Pacific,Food & Beverage,79243.16,516
+2023,2,Latin America,Electronics,190616.22,136
+2023,2,Latin America,Furniture,192294.24,265
+2023,2,Latin America,Office Supplies,268057.27,328
+2023,2,Latin America,Clothing,120531.84,235
+2023,2,Latin America,Food & Beverage,160581.51,457
+2023,2,Middle East & Africa,Electronics,200998.35,151
+2023,2,Middle East & Africa,Furniture,235721.49,119
+2023,2,Middle East & Africa,Office Supplies,75807.23,411
+2023,2,Middle East & Africa,Clothing,93470.41,138
+2023,2,Middle East & Africa,Food & Beverage,56118.49,430
+2023,3,North America,Electronics,184387.8,470
+2023,3,North America,Furniture,285122.01,130
+2023,3,North America,Office Supplies,199236.25,173
+2023,3,North America,Clothing,122414.18,580
+2023,3,North America,Food & Beverage,139190.95,572
+2023,3,Europe,Electronics,51051.42,418
+2023,3,Europe,Furniture,150544.99,348
+2023,3,Europe,Office Supplies,264902.3,429
+2023,3,Europe,Clothing,233991.71,367
+2023,3,Europe,Food & Beverage,193431.37,322
+2023,3,Asia Pacific,Electronics,222209.3,301
+2023,3,Asia Pacific,Furniture,251261.9,490
+2023,3,Asia Pacific,Office Supplies,81326.84,184
+2023,3,Asia Pacific,Clothing,162216.91,427
+2023,3,Asia Pacific,Food & Beverage,63415.02,478
+2023,3,Latin America,Electronics,94408.11,147
+2023,3,Latin America,Furniture,158190.31,392
+2023,3,Latin America,Office Supplies,137743.48,490
+2023,3,Latin America,Clothing,124256.27,192
+2023,3,Latin America,Food & Beverage,205571.96,131
+2023,3,Middle East & Africa,Electronics,229282.08,436
+2023,3,Middle East & Africa,Furniture,114839.62,112
+2023,3,Middle East & Africa,Office Supplies,57280.18,146
+2023,3,Middle East & Africa,Clothing,267981.4,511
+2023,3,Middle East & Africa,Food & Beverage,138608.4,303
+2023,4,North America,Electronics,158985.54,342
+2023,4,North America,Furniture,94719.83,567
+2023,4,North America,Office Supplies,192005.11,374
+2023,4,North America,Clothing,268591.68,298
+2023,4,North America,Food & Beverage,131342.94,520
+2023,4,Europe,Electronics,107119.78,401
+2023,4,Europe,Furniture,178688.73,214
+2023,4,Europe,Office Supplies,281935.54,315
+2023,4,Europe,Clothing,213579.81,552
+2023,4,Europe,Food & Beverage,267059.61,147
+2023,4,Asia Pacific,Electronics,261175.48,291
+2023,4,Asia Pacific,Furniture,54067.26,342
+2023,4,Asia Pacific,Office Supplies,229560.73,299
+2023,4,Asia Pacific,Clothing,141402.36,346
+2023,4,Asia Pacific,Food & Beverage,267997.06,375
+2023,4,Latin America,Electronics,290352.23,279
+2023,4,Latin America,Furniture,164529.44,133
+2023,4,Latin America,Office Supplies,278912.58,145
+2023,4,Latin America,Clothing,291762.52,283
+2023,4,Latin America,Food & Beverage,92671.13,258
+2023,4,Middle East & Africa,Electronics,67466.17,237
+2023,4,Middle East & Africa,Furniture,236877.19,401
+2023,4,Middle East & Africa,Office Supplies,78944.94,469
+2023,4,Middle East & Africa,Clothing,63937.04,392
+2023,4,Middle East & Africa,Food & Beverage,246354.77,421
+2023,5,North America,Electronics,130866.41,208
+2023,5,North America,Furniture,193323.54,111
+2023,5,North America,Office Supplies,120885.34,128
+2023,5,North America,Clothing,274621.37,473
+2023,5,North America,Food & Beverage,122551.09,153
+2023,5,Europe,Electronics,267739.88,158
+2023,5,Europe,Furniture,245991.76,336
+2023,5,Europe,Office Supplies,155746.76,388
+2023,5,Europe,Clothing,107552.54,129
+2023,5,Europe,Food & Beverage,188577.82,211
+2023,5,Asia Pacific,Electronics,226148.01,575
+2023,5,Asia Pacific,Furniture,208647.38,124
+2023,5,Asia Pacific,Office Supplies,246293.07,260
+2023,5,Asia Pacific,Clothing,178194.01,453
+2023,5,Asia Pacific,Food & Beverage,177041.12,430
+2023,5,Latin America,Electronics,257509.58,192
+2023,5,Latin America,Furniture,102713.46,475
+2023,5,Latin America,Office Supplies,255711.77,546
+2023,5,Latin America,Clothing,246462.15,573
+2023,5,Latin America,Food & Beverage,262908.98,408
+2023,5,Middle East & Africa,Electronics,85469.9,307
+2023,5,Middle East & Africa,Furniture,100099.52,113
+2023,5,Middle East & Africa,Office Supplies,169209.13,301
+2023,5,Middle East & Africa,Clothing,196254.04,419
+2023,5,Middle East & Africa,Food & Beverage,282096.16,179
+2023,6,North America,Electronics,199412.85,552
+2023,6,North America,Furniture,64170.74,238
+2023,6,North America,Office Supplies,109853.71,427
+2023,6,North America,Clothing,243939.08,521
+2023,6,North America,Food & Beverage,216452.38,586
+2023,6,Europe,Electronics,127640.21,365
+2023,6,Europe,Furniture,87403.22,403
+2023,6,Europe,Office Supplies,250334.19,218
+2023,6,Europe,Clothing,196530.11,306
+2023,6,Europe,Food & Beverage,266878.07,552
+2023,6,Asia Pacific,Electronics,109556.37,492
+2023,6,Asia Pacific,Furniture,185232.18,360
+2023,6,Asia Pacific,Office Supplies,263001.84,358
+2023,6,Asia Pacific,Clothing,209702.36,326
+2023,6,Asia Pacific,Food & Beverage,54764.68,167
+2023,6,Latin America,Electronics,169511.93,357
+2023,6,Latin America,Furniture,99786.86,598
+2023,6,Latin America,Office Supplies,206630.77,554
+2023,6,Latin America,Clothing,132753.24,522
+2023,6,Latin America,Food & Beverage,179326.42,518
+2023,6,Middle East & Africa,Electronics,212020.29,299
+2023,6,Middle East & Africa,Furniture,150806.86,535
+2023,6,Middle East & Africa,Office Supplies,192822.28,245
+2023,6,Middle East & Africa,Clothing,245605.67,260
+2023,6,Middle East & Africa,Food & Beverage,248705.08,268
+2023,7,North America,Electronics,127058.89,266
+2023,7,North America,Furniture,213930.94,264
+2023,7,North America,Office Supplies,136390.06,406
+2023,7,North America,Clothing,196406.78,505
+2023,7,North America,Food & Beverage,222741.91,562
+2023,7,Europe,Electronics,180135.73,577
+2023,7,Europe,Furniture,250686.06,599
+2023,7,Europe,Office Supplies,218734.25,202
+2023,7,Europe,Clothing,262850.76,385
+2023,7,Europe,Food & Beverage,273388.52,305
+2023,7,Asia Pacific,Electronics,130655.82,555
+2023,7,Asia Pacific,Furniture,169771.46,384
+2023,7,Asia Pacific,Office Supplies,85609.29,114
+2023,7,Asia Pacific,Clothing,188507.18,235
+2023,7,Asia Pacific,Food & Beverage,74278.28,361
+2023,7,Latin America,Electronics,223167.64,387
+2023,7,Latin America,Furniture,102461.16,197
+2023,7,Latin America,Office Supplies,147645.3,125
+2023,7,Latin America,Clothing,132889.35,288
+2023,7,Latin America,Food & Beverage,216012.46,198
+2023,7,Middle East & Africa,Electronics,160249.38,362
+2023,7,Middle East & Africa,Furniture,89996.61,514
+2023,7,Middle East & Africa,Office Supplies,295188.91,152
+2023,7,Middle East & Africa,Clothing,275522.29,391
+2023,7,Middle East & Africa,Food & Beverage,139212.46,539
+2023,8,North America,Electronics,166331.33,151
+2023,8,North America,Furniture,156248.18,333
+2023,8,North America,Office Supplies,175931.54,529
+2023,8,North America,Clothing,143040.36,349
+2023,8,North America,Food & Beverage,117480.66,392
+2023,8,Europe,Electronics,60640.51,344
+2023,8,Europe,Furniture,298926.07,567
+2023,8,Europe,Office Supplies,298552.69,397
+2023,8,Europe,Clothing,139296.68,364
+2023,8,Europe,Food & Beverage,278950.65,591
+2023,8,Asia Pacific,Electronics,232702.62,235
+2023,8,Asia Pacific,Furniture,88555.89,488
+2023,8,Asia Pacific,Office Supplies,204312.98,268
+2023,8,Asia Pacific,Clothing,276936.78,245
+2023,8,Asia Pacific,Food & Beverage,203625.11,514
+2023,8,Latin America,Electronics,164390.98,292
+2023,8,Latin America,Furniture,196474.95,145
+2023,8,Latin America,Office Supplies,199758.1,151
+2023,8,Latin America,Clothing,257071.98,199
+2023,8,Latin America,Food & Beverage,250702.73,379
+2023,8,Middle East & Africa,Electronics,53369.8,123
+2023,8,Middle East & Africa,Furniture,179379.27,445
+2023,8,Middle East & Africa,Office Supplies,280121.09,460
+2023,8,Middle East & Africa,Clothing,112336.97,260
+2023,8,Middle East & Africa,Food & Beverage,54242.67,185
+2023,9,North America,Electronics,137126.59,491
+2023,9,North America,Furniture,220941.82,282
+2023,9,North America,Office Supplies,224404.71,206
+2023,9,North America,Clothing,207244.61,438
+2023,9,North America,Food & Beverage,188229.46,302
+2023,9,Europe,Electronics,176068.12,274
+2023,9,Europe,Furniture,80307.38,416
+2023,9,Europe,Office Supplies,64470.49,204
+2023,9,Europe,Clothing,261530.87,281
+2023,9,Europe,Food & Beverage,251977.91,535
+2023,9,Asia Pacific,Electronics,190919.36,328
+2023,9,Asia Pacific,Furniture,250169.36,460
+2023,9,Asia Pacific,Office Supplies,293494.63,305
+2023,9,Asia Pacific,Clothing,109262.53,383
+2023,9,Asia Pacific,Food & Beverage,136863.8,299
+2023,9,Latin America,Electronics,184921.37,279
+2023,9,Latin America,Furniture,110077.1,144
+2023,9,Latin America,Office Supplies,253609.02,409
+2023,9,Latin America,Clothing,222487.96,221
+2023,9,Latin America,Food & Beverage,251509.85,571
+2023,9,Middle East & Africa,Electronics,138674.05,318
+2023,9,Middle East & Africa,Furniture,213749.99,478
+2023,9,Middle East & Africa,Office Supplies,252891.29,417
+2023,9,Middle East & Africa,Clothing,83675.94,596
+2023,9,Middle East & Africa,Food & Beverage,245921.53,436
+2023,10,North America,Electronics,163399.5,191
+2023,10,North America,Furniture,99628.65,569
+2023,10,North America,Office Supplies,150317.47,135
+2023,10,North America,Clothing,274445.25,222
+2023,10,North America,Food & Beverage,250952.55,239
+2023,10,Europe,Electronics,110714.57,167
+2023,10,Europe,Furniture,50686.73,187
+2023,10,Europe,Office Supplies,249509.46,415
+2023,10,Europe,Clothing,239310.5,537
+2023,10,Europe,Food & Beverage,106260.75,474
+2023,10,Asia Pacific,Electronics,202027.02,539
+2023,10,Asia Pacific,Furniture,247404.01,320
+2023,10,Asia Pacific,Office Supplies,181781.01,565
+2023,10,Asia Pacific,Clothing,217554.82,438
+2023,10,Asia Pacific,Food & Beverage,255279.68,228
+2023,10,Latin America,Electronics,202607.96,121
+2023,10,Latin America,Furniture,269794.44,557
+2023,10,Latin America,Office Supplies,53461.49,444
+2023,10,Latin America,Clothing,271483.45,423
+2023,10,Latin America,Food & Beverage,261686.12,175
+2023,10,Middle East & Africa,Electronics,232938.05,412
+2023,10,Middle East & Africa,Furniture,286173.28,546
+2023,10,Middle East & Africa,Office Supplies,144542.9,386
+2023,10,Middle East & Africa,Clothing,203691.69,496
+2023,10,Middle East & Africa,Food & Beverage,267548.15,504
+2023,11,North America,Electronics,78697.83,524
+2023,11,North America,Furniture,288240.01,535
+2023,11,North America,Office Supplies,234706.23,257
+2023,11,North America,Clothing,131012.85,456
+2023,11,North America,Food & Beverage,157173.92,264
+2023,11,Europe,Electronics,96176.47,371
+2023,11,Europe,Furniture,93324.49,554
+2023,11,Europe,Office Supplies,285901.61,152
+2023,11,Europe,Clothing,208089.87,254
+2023,11,Europe,Food & Beverage,236599.11,471
+2023,11,Asia Pacific,Electronics,263371.5,521
+2023,11,Asia Pacific,Furniture,253745.96,529
+2023,11,Asia Pacific,Office Supplies,132915.62,431
+2023,11,Asia Pacific,Clothing,50142.7,414
+2023,11,Asia Pacific,Food & Beverage,278929.59,375
+2023,11,Latin America,Electronics,292789.08,445
+2023,11,Latin America,Furniture,114180.91,563
+2023,11,Latin America,Office Supplies,282428.03,328
+2023,11,Latin America,Clothing,227207.2,470
+2023,11,Latin America,Food & Beverage,162944.55,282
+2023,11,Middle East & Africa,Electronics,72321.23,186
+2023,11,Middle East & Africa,Furniture,228676.6,311
+2023,11,Middle East & Africa,Office Supplies,145959.75,380
+2023,11,Middle East & Africa,Clothing,179157.78,545
+2023,11,Middle East & Africa,Food & Beverage,88214.64,212
+2023,12,North America,Electronics,242315.47,190
+2023,12,North America,Furniture,269962.56,308
+2023,12,North America,Office Supplies,170356.05,372
+2023,12,North America,Clothing,266276.2,255
+2023,12,North America,Food & Beverage,271792.49,310
+2023,12,Europe,Electronics,163197.91,477
+2023,12,Europe,Furniture,168328.1,377
+2023,12,Europe,Office Supplies,212293.32,411
+2023,12,Europe,Clothing,63678.18,357
+2023,12,Europe,Food & Beverage,102219.29,506
+2023,12,Asia Pacific,Electronics,181948.03,480
+2023,12,Asia Pacific,Furniture,120037.43,216
+2023,12,Asia Pacific,Office Supplies,222455.71,419
+2023,12,Asia Pacific,Clothing,63867.12,126
+2023,12,Asia Pacific,Food & Beverage,99880.2,251
+2023,12,Latin America,Electronics,203589.46,195
+2023,12,Latin America,Furniture,94864.6,591
+2023,12,Latin America,Office Supplies,132238.8,406
+2023,12,Latin America,Clothing,63794.14,307
+2023,12,Latin America,Food & Beverage,66816.34,369
+2023,12,Middle East & Africa,Electronics,189144.51,575
+2023,12,Middle East & Africa,Furniture,290975.65,538
+2023,12,Middle East & Africa,Office Supplies,84875.58,209
+2023,12,Middle East & Africa,Clothing,209864.76,281
+2023,12,Middle East & Africa,Food & Beverage,213474.86,479
+2024,1,North America,Electronics,69602.68,213
+2024,1,North America,Furniture,171051.2,396
+2024,1,North America,Office Supplies,209355.42,187
+2024,1,North America,Clothing,198665.9,390
+2024,1,North America,Food & Beverage,319489.65,298
+2024,1,Europe,Electronics,173017.49,141
+2024,1,Europe,Furniture,92616.76,518
+2024,1,Europe,Office Supplies,237460.12,514
+2024,1,Europe,Clothing,86188.32,421
+2024,1,Europe,Food & Beverage,265253.07,193
+2024,1,Asia Pacific,Electronics,238975.94,394
+2024,1,Asia Pacific,Furniture,251018.72,198
+2024,1,Asia Pacific,Office Supplies,258640.82,381
+2024,1,Asia Pacific,Clothing,264626.13,447
+2024,1,Asia Pacific,Food & Beverage,115132.23,268
+2024,1,Latin America,Electronics,146034.96,333
+2024,1,Latin America,Furniture,238470.41,249
+2024,1,Latin America,Office Supplies,138432.23,271
+2024,1,Latin America,Clothing,232110.85,397
+2024,1,Latin America,Food & Beverage,122502.02,374
+2024,1,Middle East & Africa,Electronics,119398.64,228
+2024,1,Middle East & Africa,Furniture,77769.87,463
+2024,1,Middle East & Africa,Office Supplies,111362.92,475
+2024,1,Middle East & Africa,Clothing,178113.98,383
+2024,1,Middle East & Africa,Food & Beverage,209758.58,332
+2024,2,North America,Electronics,294457.54,407
+2024,2,North America,Furniture,174479.56,587
+2024,2,North America,Office Supplies,253000.41,160
+2024,2,North America,Clothing,90863.48,101
+2024,2,North America,Food & Beverage,83559.09,228
+2024,2,Europe,Electronics,135471.68,248
+2024,2,Europe,Furniture,88161.79,124
+2024,2,Europe,Office Supplies,141865.46,387
+2024,2,Europe,Clothing,302129.91,313
+2024,2,Europe,Food & Beverage,204711.55,576
+2024,2,Asia Pacific,Electronics,61757.07,213
+2024,2,Asia Pacific,Furniture,183989.33,303
+2024,2,Asia Pacific,Office Supplies,166780.69,473
+2024,2,Asia Pacific,Clothing,333830.86,230
+2024,2,Asia Pacific,Food & Beverage,320135.69,457
+2024,2,Latin America,Electronics,297202.86,403
+2024,2,Latin America,Furniture,71107.66,261
+2024,2,Latin America,Office Supplies,218476.75,332
+2024,2,Latin America,Clothing,312069.76,215
+2024,2,Latin America,Food & Beverage,290247.9,132
+2024,2,Middle East & Africa,Electronics,115549.99,562
+2024,2,Middle East & Africa,Furniture,279139.3,569
+2024,2,Middle East & Africa,Office Supplies,246097.6,130
+2024,2,Middle East & Africa,Clothing,149474.9,500
+2024,2,Middle East & Africa,Food & Beverage,184684.12,320
+2024,3,North America,Electronics,269892.85,390
+2024,3,North America,Furniture,259846.28,255
+2024,3,North America,Office Supplies,119037.29,553
+2024,3,North America,Clothing,80321.59,369
+2024,3,North America,Food & Beverage,275440.22,267
+2024,3,Europe,Electronics,304188.84,486
+2024,3,Europe,Furniture,165048.2,322
+2024,3,Europe,Office Supplies,268134.62,253
+2024,3,Europe,Clothing,238386.62,434
+2024,3,Europe,Food & Beverage,135032.24,597
+2024,3,Asia Pacific,Electronics,302803.33,269
+2024,3,Asia Pacific,Furniture,201393.34,474
+2024,3,Asia Pacific,Office Supplies,96698.69,484
+2024,3,Asia Pacific,Clothing,82189.35,351
+2024,3,Asia Pacific,Food & Beverage,148554.38,451
+2024,3,Latin America,Electronics,276471.08,427
+2024,3,Latin America,Furniture,176349.17,262
+2024,3,Latin America,Office Supplies,191949.5,463
+2024,3,Latin America,Clothing,98276.07,178
+2024,3,Latin America,Food & Beverage,138207.32,384
+2024,3,Middle East & Africa,Electronics,152737.97,333
+2024,3,Middle East & Africa,Furniture,194746.54,163
+2024,3,Middle East & Africa,Office Supplies,284154.28,106
+2024,3,Middle East & Africa,Clothing,237824.77,570
+2024,3,Middle East & Africa,Food & Beverage,227239.11,340
+2024,4,North America,Electronics,175600.0,529
+2024,4,North America,Furniture,207713.8,482
+2024,4,North America,Office Supplies,66497.01,287
+2024,4,North America,Clothing,241850.66,163
+2024,4,North America,Food & Beverage,310183.21,197
+2024,4,Europe,Electronics,138041.72,575
+2024,4,Europe,Furniture,83469.47,200
+2024,4,Europe,Office Supplies,332506.98,455
+2024,4,Europe,Clothing,73803.29,125
+2024,4,Europe,Food & Beverage,245404.53,206
+2024,4,Asia Pacific,Electronics,125395.53,529
+2024,4,Asia Pacific,Furniture,235396.14,347
+2024,4,Asia Pacific,Office Supplies,241979.17,528
+2024,4,Asia Pacific,Clothing,278871.84,555
+2024,4,Asia Pacific,Food & Beverage,260900.84,340
+2024,4,Latin America,Electronics,303361.93,252
+2024,4,Latin America,Furniture,323696.8,511
+2024,4,Latin America,Office Supplies,177836.38,594
+2024,4,Latin America,Clothing,122407.32,365
+2024,4,Latin America,Food & Beverage,225879.04,470
+2024,4,Middle East & Africa,Electronics,61770.24,124
+2024,4,Middle East & Africa,Furniture,110506.37,164
+2024,4,Middle East & Africa,Office Supplies,64809.14,302
+2024,4,Middle East & Africa,Clothing,306484.06,138
+2024,4,Middle East & Africa,Food & Beverage,282407.44,422
+2024,5,North America,Electronics,291090.98,459
+2024,5,North America,Furniture,189129.35,450
+2024,5,North America,Office Supplies,186642.9,158
+2024,5,North America,Clothing,248393.77,503
+2024,5,North America,Food & Beverage,98671.82,547
+2024,5,Europe,Electronics,274990.27,125
+2024,5,Europe,Furniture,139169.17,245
+2024,5,Europe,Office Supplies,91213.45,531
+2024,5,Europe,Clothing,303933.16,295
+2024,5,Europe,Food & Beverage,174060.64,541
+2024,5,Asia Pacific,Electronics,277386.6,122
+2024,5,Asia Pacific,Furniture,266439.63,512
+2024,5,Asia Pacific,Office Supplies,192407.48,405
+2024,5,Asia Pacific,Clothing,289023.36,417
+2024,5,Asia Pacific,Food & Beverage,289748.32,500
+2024,5,Latin America,Electronics,221010.03,273
+2024,5,Latin America,Furniture,109904.65,246
+2024,5,Latin America,Office Supplies,147998.5,277
+2024,5,Latin America,Clothing,167306.77,522
+2024,5,Latin America,Food & Beverage,278483.92,251
+2024,5,Middle East & Africa,Electronics,286773.29,192
+2024,5,Middle East & Africa,Furniture,237384.42,328
+2024,5,Middle East & Africa,Office Supplies,189687.85,369
+2024,5,Middle East & Africa,Clothing,335852.92,202
+2024,5,Middle East & Africa,Food & Beverage,128347.03,368
+2024,6,North America,Electronics,126383.32,217
+2024,6,North America,Furniture,111996.34,211
+2024,6,North America,Office Supplies,110435.21,174
+2024,6,North America,Clothing,320167.19,580
+2024,6,North America,Food & Beverage,271876.36,597
+2024,6,Europe,Electronics,216287.42,126
+2024,6,Europe,Furniture,278447.67,110
+2024,6,Europe,Office Supplies,286548.49,586
+2024,6,Europe,Clothing,222642.27,395
+2024,6,Europe,Food & Beverage,317906.2,385
+2024,6,Asia Pacific,Electronics,188833.88,432
+2024,6,Asia Pacific,Furniture,169998.0,437
+2024,6,Asia Pacific,Office Supplies,238107.55,421
+2024,6,Asia Pacific,Clothing,241368.46,258
+2024,6,Asia Pacific,Food & Beverage,186056.81,585
+2024,6,Latin America,Electronics,114417.12,543
+2024,6,Latin America,Furniture,252192.08,131
+2024,6,Latin America,Office Supplies,243386.62,480
+2024,6,Latin America,Clothing,243780.57,426
+2024,6,Latin America,Food & Beverage,118777.69,393
+2024,6,Middle East & Africa,Electronics,226824.38,437
+2024,6,Middle East & Africa,Furniture,119368.09,153
+2024,6,Middle East & Africa,Office Supplies,57963.09,505
+2024,6,Middle East & Africa,Clothing,290042.61,483
+2024,6,Middle East & Africa,Food & Beverage,264990.27,468
+2024,7,North America,Electronics,300884.02,278
+2024,7,North America,Furniture,323533.69,469
+2024,7,North America,Office Supplies,314616.77,128
+2024,7,North America,Clothing,85947.66,575
+2024,7,North America,Food & Beverage,150378.74,128
+2024,7,Europe,Electronics,245574.87,348
+2024,7,Europe,Furniture,241701.88,433
+2024,7,Europe,Office Supplies,233074.66,485
+2024,7,Europe,Clothing,70426.49,189
+2024,7,Europe,Food & Beverage,93614.21,511
+2024,7,Asia Pacific,Electronics,221763.62,127
+2024,7,Asia Pacific,Furniture,244041.91,325
+2024,7,Asia Pacific,Office Supplies,123887.95,437
+2024,7,Asia Pacific,Clothing,240659.31,321
+2024,7,Asia Pacific,Food & Beverage,147796.6,288
+2024,7,Latin America,Electronics,66054.76,247
+2024,7,Latin America,Furniture,304484.55,474
+2024,7,Latin America,Office Supplies,295067.63,579
+2024,7,Latin America,Clothing,166138.71,194
+2024,7,Latin America,Food & Beverage,104385.77,520
+2024,7,Middle East & Africa,Electronics,59449.07,447
+2024,7,Middle East & Africa,Furniture,110090.78,408
+2024,7,Middle East & Africa,Office Supplies,224267.42,402
+2024,7,Middle East & Africa,Clothing,149766.95,466
+2024,7,Middle East & Africa,Food & Beverage,153079.95,527
+2024,8,North America,Electronics,200561.4,574
+2024,8,North America,Furniture,235495.09,411
+2024,8,North America,Office Supplies,219622.01,586
+2024,8,North America,Clothing,222078.14,469
+2024,8,North America,Food & Beverage,276648.05,462
+2024,8,Europe,Electronics,108035.33,111
+2024,8,Europe,Furniture,92476.26,539
+2024,8,Europe,Office Supplies,70465.61,136
+2024,8,Europe,Clothing,120206.56,450
+2024,8,Europe,Food & Beverage,169160.17,460
+2024,8,Asia Pacific,Electronics,57938.02,471
+2024,8,Asia Pacific,Furniture,85825.13,577
+2024,8,Asia Pacific,Office Supplies,172807.94,363
+2024,8,Asia Pacific,Clothing,229036.0,177
+2024,8,Asia Pacific,Food & Beverage,179866.08,431
+2024,8,Latin America,Electronics,247778.58,463
+2024,8,Latin America,Furniture,73494.63,592
+2024,8,Latin America,Office Supplies,206978.26,507
+2024,8,Latin America,Clothing,280511.56,283
+2024,8,Latin America,Food & Beverage,319419.56,281
+2024,8,Middle East & Africa,Electronics,64787.95,384
+2024,8,Middle East & Africa,Furniture,318684.07,317
+2024,8,Middle East & Africa,Office Supplies,82914.44,467
+2024,8,Middle East & Africa,Clothing,125606.21,124
+2024,8,Middle East & Africa,Food & Beverage,204444.96,362
+2024,9,North America,Electronics,253649.81,479
+2024,9,North America,Furniture,157044.62,444
+2024,9,North America,Office Supplies,71045.64,451
+2024,9,North America,Clothing,302851.33,318
+2024,9,North America,Food & Beverage,316938.49,394
+2024,9,Europe,Electronics,103659.49,116
+2024,9,Europe,Furniture,250575.35,398
+2024,9,Europe,Office Supplies,229518.69,483
+2024,9,Europe,Clothing,68500.65,180
+2024,9,Europe,Food & Beverage,307589.88,335
+2024,9,Asia Pacific,Electronics,310899.14,379
+2024,9,Asia Pacific,Furniture,314106.25,562
+2024,9,Asia Pacific,Office Supplies,230963.94,106
+2024,9,Asia Pacific,Clothing,284798.88,360
+2024,9,Asia Pacific,Food & Beverage,281623.54,547
+2024,9,Latin America,Electronics,95738.74,545
+2024,9,Latin America,Furniture,272840.12,247
+2024,9,Latin America,Office Supplies,170980.1,118
+2024,9,Latin America,Clothing,260488.82,555
+2024,9,Latin America,Food & Beverage,216573.19,319
+2024,9,Middle East & Africa,Electronics,141325.7,393
+2024,9,Middle East & Africa,Furniture,161577.23,536
+2024,9,Middle East & Africa,Office Supplies,136895.99,196
+2024,9,Middle East & Africa,Clothing,270134.05,156
+2024,9,Middle East & Africa,Food & Beverage,122664.75,417
+2024,10,North America,Electronics,325426.11,410
+2024,10,North America,Furniture,265437.45,586
+2024,10,North America,Office Supplies,150058.89,249
+2024,10,North America,Clothing,220064.57,392
+2024,10,North America,Food & Beverage,159678.61,190
+2024,10,Europe,Electronics,213353.57,415
+2024,10,Europe,Furniture,279016.41,146
+2024,10,Europe,Office Supplies,176336.92,350
+2024,10,Europe,Clothing,93766.16,550
+2024,10,Europe,Food & Beverage,252838.06,225
+2024,10,Asia Pacific,Electronics,141079.8,191
+2024,10,Asia Pacific,Furniture,278769.21,380
+2024,10,Asia Pacific,Office Supplies,184339.64,437
+2024,10,Asia Pacific,Clothing,331211.61,334
+2024,10,Asia Pacific,Food & Beverage,109282.47,561
+2024,10,Latin America,Electronics,122948.02,427
+2024,10,Latin America,Furniture,289584.75,260
+2024,10,Latin America,Office Supplies,225347.37,266
+2024,10,Latin America,Clothing,117700.13,238
+2024,10,Latin America,Food & Beverage,266635.51,295
+2024,10,Middle East & Africa,Electronics,163633.57,401
+2024,10,Middle East & Africa,Furniture,279082.28,352
+2024,10,Middle East & Africa,Office Supplies,162649.53,488
+2024,10,Middle East & Africa,Clothing,76360.12,210
+2024,10,Middle East & Africa,Food & Beverage,169870.05,334
+2024,11,North America,Electronics,119451.92,492
+2024,11,North America,Furniture,286008.49,463
+2024,11,North America,Office Supplies,170382.56,230
+2024,11,North America,Clothing,71443.98,585
+2024,11,North America,Food & Beverage,112179.62,320
+2024,11,Europe,Electronics,269574.85,538
+2024,11,Europe,Furniture,199873.74,484
+2024,11,Europe,Office Supplies,139731.94,168
+2024,11,Europe,Clothing,228568.8,139
+2024,11,Europe,Food & Beverage,95030.03,465
+2024,11,Asia Pacific,Electronics,270518.73,108
+2024,11,Asia Pacific,Furniture,137654.91,144
+2024,11,Asia Pacific,Office Supplies,78774.31,453
+2024,11,Asia Pacific,Clothing,120802.67,549
+2024,11,Asia Pacific,Food & Beverage,330330.89,174
+2024,11,Latin America,Electronics,272152.1,505
+2024,11,Latin America,Furniture,304794.45,286
+2024,11,Latin America,Office Supplies,314429.93,118
+2024,11,Latin America,Clothing,88613.79,423
+2024,11,Latin America,Food & Beverage,274331.87,542
+2024,11,Middle East & Africa,Electronics,101678.86,266
+2024,11,Middle East & Africa,Furniture,287304.47,538
+2024,11,Middle East & Africa,Office Supplies,262079.6,311
+2024,11,Middle East & Africa,Clothing,238519.35,238
+2024,11,Middle East & Africa,Food & Beverage,77412.26,344
+2024,12,North America,Electronics,329871.51,503
+2024,12,North America,Furniture,330442.18,177
+2024,12,North America,Office Supplies,224957.03,464
+2024,12,North America,Clothing,282775.72,502
+2024,12,North America,Food & Beverage,322062.09,503
+2024,12,Europe,Electronics,282827.29,529
+2024,12,Europe,Furniture,64973.57,243
+2024,12,Europe,Office Supplies,234402.83,488
+2024,12,Europe,Clothing,245301.9,496
+2024,12,Europe,Food & Beverage,68989.51,365
+2024,12,Asia Pacific,Electronics,269981.65,379
+2024,12,Asia Pacific,Furniture,58602.85,439
+2024,12,Asia Pacific,Office Supplies,232586.25,296
+2024,12,Asia Pacific,Clothing,285390.0,405
+2024,12,Asia Pacific,Food & Beverage,299584.5,488
+2024,12,Latin America,Electronics,324450.31,221
+2024,12,Latin America,Furniture,311219.61,426
+2024,12,Latin America,Office Supplies,220467.35,546
+2024,12,Latin America,Clothing,332281.97,408
+2024,12,Latin America,Food & Beverage,295265.92,405
+2024,12,Middle East & Africa,Electronics,155300.1,493
+2024,12,Middle East & Africa,Furniture,102724.12,529
+2024,12,Middle East & Africa,Office Supplies,123347.91,522
+2024,12,Middle East & Africa,Clothing,139417.85,135
+2024,12,Middle East & Africa,Food & Beverage,81922.64,239
+2025,1,North America,Electronics,197352.15,423
+2025,1,North America,Furniture,317531.83,328
+2025,1,North America,Office Supplies,209100.6,525
+2025,1,North America,Clothing,353464.63,379
+2025,1,North America,Food & Beverage,270885.89,334
+2025,1,Europe,Electronics,262889.15,513
+2025,1,Europe,Furniture,154197.9,508
+2025,1,Europe,Office Supplies,123074.84,600
+2025,1,Europe,Clothing,176545.82,379
+2025,1,Europe,Food & Beverage,86338.92,302
+2025,1,Asia Pacific,Electronics,195750.64,302
+2025,1,Asia Pacific,Furniture,88750.95,383
+2025,1,Asia Pacific,Office Supplies,307160.91,542
+2025,1,Asia Pacific,Clothing,179677.98,162
+2025,1,Asia Pacific,Food & Beverage,130751.99,545
+2025,1,Latin America,Electronics,277376.94,113
+2025,1,Latin America,Furniture,238006.42,448
+2025,1,Latin America,Office Supplies,313364.38,204
+2025,1,Latin America,Clothing,330378.63,424
+2025,1,Latin America,Food & Beverage,303308.03,378
+2025,1,Middle East & Africa,Electronics,359807.59,452
+2025,1,Middle East & Africa,Furniture,298524.21,594
+2025,1,Middle East & Africa,Office Supplies,299709.15,178
+2025,1,Middle East & Africa,Clothing,320081.49,173
+2025,1,Middle East & Africa,Food & Beverage,253468.8,414
+2025,2,North America,Electronics,89131.99,317
+2025,2,North America,Furniture,66334.47,219
+2025,2,North America,Office Supplies,321033.25,390
+2025,2,North America,Clothing,246562.33,380
+2025,2,North America,Food & Beverage,314318.39,440
+2025,2,Europe,Electronics,230566.98,536
+2025,2,Europe,Furniture,70464.87,429
+2025,2,Europe,Office Supplies,113352.73,273
+2025,2,Europe,Clothing,369963.72,290
+2025,2,Europe,Food & Beverage,286143.95,343
+2025,2,Asia Pacific,Electronics,334036.49,251
+2025,2,Asia Pacific,Furniture,96788.01,193
+2025,2,Asia Pacific,Office Supplies,108652.16,501
+2025,2,Asia Pacific,Clothing,300998.74,396
+2025,2,Asia Pacific,Food & Beverage,87330.81,200
+2025,2,Latin America,Electronics,308416.44,420
+2025,2,Latin America,Furniture,196479.37,414
+2025,2,Latin America,Office Supplies,89050.83,506
+2025,2,Latin America,Clothing,228377.82,329
+2025,2,Latin America,Food & Beverage,225262.92,561
+2025,2,Middle East & Africa,Electronics,341463.14,385
+2025,2,Middle East & Africa,Furniture,103038.72,511
+2025,2,Middle East & Africa,Office Supplies,200257.44,271
+2025,2,Middle East & Africa,Clothing,275037.67,191
+2025,2,Middle East & Africa,Food & Beverage,125453.24,298
+2025,3,North America,Electronics,96671.49,105
+2025,3,North America,Furniture,118322.38,535
+2025,3,North America,Office Supplies,71962.94,162
+2025,3,North America,Clothing,276170.46,256
+2025,3,North America,Food & Beverage,295981.53,483
+2025,3,Europe,Electronics,110875.4,490
+2025,3,Europe,Furniture,281005.1,129
+2025,3,Europe,Office Supplies,291167.94,156
+2025,3,Europe,Clothing,271187.45,144
+2025,3,Europe,Food & Beverage,75745.31,407
+2025,3,Asia Pacific,Electronics,296290.91,495
+2025,3,Asia Pacific,Furniture,62941.8,286
+2025,3,Asia Pacific,Office Supplies,126114.15,562
+2025,3,Asia Pacific,Clothing,198288.96,511
+2025,3,Asia Pacific,Food & Beverage,360154.51,482
+2025,3,Latin America,Electronics,237052.24,442
+2025,3,Latin America,Furniture,180302.49,577
+2025,3,Latin America,Office Supplies,265784.33,492
+2025,3,Latin America,Clothing,210528.88,467
+2025,3,Latin America,Food & Beverage,248827.75,564
+2025,3,Middle East & Africa,Electronics,368951.53,378
+2025,3,Middle East & Africa,Furniture,221858.9,170
+2025,3,Middle East & Africa,Office Supplies,102618.28,396
+2025,3,Middle East & Africa,Clothing,366797.93,590
+2025,3,Middle East & Africa,Food & Beverage,226135.21,488
+2025,4,North America,Electronics,213445.62,315
+2025,4,North America,Furniture,86044.28,186
+2025,4,North America,Office Supplies,69560.16,127
+2025,4,North America,Clothing,202310.15,137
+2025,4,North America,Food & Beverage,349386.16,350
+2025,4,Europe,Electronics,82022.69,265
+2025,4,Europe,Furniture,280586.11,303
+2025,4,Europe,Office Supplies,118650.47,210
+2025,4,Europe,Clothing,198167.96,543
+2025,4,Europe,Food & Beverage,179255.73,284
+2025,4,Asia Pacific,Electronics,347896.8,295
+2025,4,Asia Pacific,Furniture,185951.03,459
+2025,4,Asia Pacific,Office Supplies,202889.93,220
+2025,4,Asia Pacific,Clothing,289727.09,585
+2025,4,Asia Pacific,Food & Beverage,201814.64,499
+2025,4,Latin America,Electronics,122392.25,510
+2025,4,Latin America,Furniture,325881.57,593
+2025,4,Latin America,Office Supplies,140702.99,338
+2025,4,Latin America,Clothing,105857.49,476
+2025,4,Latin America,Food & Beverage,148335.85,133
+2025,4,Middle East & Africa,Electronics,225141.75,134
+2025,4,Middle East & Africa,Furniture,173869.46,463
+2025,4,Middle East & Africa,Office Supplies,253646.29,104
+2025,4,Middle East & Africa,Clothing,357887.71,451
+2025,4,Middle East & Africa,Food & Beverage,166470.67,482
+2025,5,North America,Electronics,294210.85,425
+2025,5,North America,Furniture,227731.59,364
+2025,5,North America,Office Supplies,180271.59,157
+2025,5,North America,Clothing,164197.94,577
+2025,5,North America,Food & Beverage,176846.76,507
+2025,5,Europe,Electronics,121919.32,578
+2025,5,Europe,Furniture,85446.13,221
+2025,5,Europe,Office Supplies,162293.89,473
+2025,5,Europe,Clothing,238972.1,547
+2025,5,Europe,Food & Beverage,333880.64,335
+2025,5,Asia Pacific,Electronics,184861.31,349
+2025,5,Asia Pacific,Furniture,246107.0,455
+2025,5,Asia Pacific,Office Supplies,223718.81,556
+2025,5,Asia Pacific,Clothing,245455.64,308
+2025,5,Asia Pacific,Food & Beverage,219478.51,168
+2025,5,Latin America,Electronics,313165.57,353
+2025,5,Latin America,Furniture,163908.34,570
+2025,5,Latin America,Office Supplies,235043.78,249
+2025,5,Latin America,Clothing,271422.73,298
+2025,5,Latin America,Food & Beverage,302597.5,424
+2025,5,Middle East & Africa,Electronics,101527.06,255
+2025,5,Middle East & Africa,Furniture,144589.36,302
+2025,5,Middle East & Africa,Office Supplies,311274.22,193
+2025,5,Middle East & Africa,Clothing,369839.58,335
+2025,5,Middle East & Africa,Food & Beverage,230803.42,298
+2025,6,North America,Electronics,328364.59,495
+2025,6,North America,Furniture,223416.35,346
+2025,6,North America,Office Supplies,64158.81,344
+2025,6,North America,Clothing,71349.35,557
+2025,6,North America,Food & Beverage,99221.35,396
+2025,6,Europe,Electronics,85298.92,255
+2025,6,Europe,Furniture,306689.54,513
+2025,6,Europe,Office Supplies,156051.53,399
+2025,6,Europe,Clothing,191766.66,258
+2025,6,Europe,Food & Beverage,127661.41,178
+2025,6,Asia Pacific,Electronics,98247.32,427
+2025,6,Asia Pacific,Furniture,230568.98,157
+2025,6,Asia Pacific,Office Supplies,225440.94,144
+2025,6,Asia Pacific,Clothing,291693.85,306
+2025,6,Asia Pacific,Food & Beverage,144000.97,175
+2025,6,Latin America,Electronics,77103.4,105
+2025,6,Latin America,Furniture,77923.68,588
+2025,6,Latin America,Office Supplies,62540.37,401
+2025,6,Latin America,Clothing,229057.85,444
+2025,6,Latin America,Food & Beverage,270853.06,294
+2025,6,Middle East & Africa,Electronics,308769.52,325
+2025,6,Middle East & Africa,Furniture,111072.32,509
+2025,6,Middle East & Africa,Office Supplies,63216.12,404
+2025,6,Middle East & Africa,Clothing,176209.7,579
+2025,6,Middle East & Africa,Food & Beverage,225703.8,158

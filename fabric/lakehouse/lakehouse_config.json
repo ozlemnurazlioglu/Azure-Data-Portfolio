@@ -1,0 +1,101 @@
+{
+    "lakehouse": {
+        "name": "SalesLakehouse",
+        "workspace": "SalesAnalytics_WS",
+        "description": "Central lakehouse for Sales Analytics with medallion architecture (bronze/silver/gold)",
+        "defaultSchema": "dbo",
+        "oneLakePath": "abfss://SalesAnalytics_WS@onelake.dfs.fabric.microsoft.com/SalesLakehouse.Lakehouse"
+    },
+    "tables": [
+        {
+            "name": "dim_customers",
+            "format": "delta",
+            "description": "Customer dimension with region and segment",
+            "columns": ["customer_id", "customer_name", "segment", "region", "country"],
+            "partitionBy": []
+        },
+        {
+            "name": "dim_products",
+            "format": "delta",
+            "description": "Product dimension with category hierarchy and pricing",
+            "columns": ["product_id", "product_name", "category", "sub_category", "unit_price", "unit_cost", "profit_margin"],
+            "partitionBy": []
+        },
+        {
+            "name": "dim_date",
+            "format": "delta",
+            "description": "Date dimension with fiscal calendar support",
+            "columns": ["date_key", "full_date", "year", "quarter", "month", "month_name", "day_of_week", "is_weekend", "fiscal_year", "fiscal_quarter", "year_month"],
+            "partitionBy": []
+        },
+        {
+            "name": "dim_sales_reps",
+            "format": "delta",
+            "description": "Sales representative dimension",
+            "columns": ["rep_id", "rep_name", "region"],
+            "partitionBy": []
+        },
+        {
+            "name": "fact_sales",
+            "format": "delta",
+            "description": "Sales transactions fact table",
+            "columns": ["order_id", "order_date", "ship_date", "customer_id", "product_id", "rep_id", "channel", "payment_method", "quantity", "unit_price", "discount_pct", "total_amount", "cost_amount", "profit", "shipping_days"],
+            "partitionBy": ["year(order_date)"]
+        },
+        {
+            "name": "fact_returns",
+            "format": "delta",
+            "description": "Product returns fact table",
+            "columns": ["return_id", "original_order_id", "return_date", "product_id", "quantity", "reason", "refund_amount"],
+            "partitionBy": []
+        },
+        {
+            "name": "fact_targets",
+            "format": "delta",
+            "description": "Revenue and order targets by region/category",
+            "columns": ["year", "month", "region", "category", "target_revenue", "target_orders"],
+            "partitionBy": []
+        },
+        {
+            "name": "gold_monthly_summary",
+            "format": "delta",
+            "description": "Pre-aggregated monthly summary for dashboard performance",
+            "columns": ["year", "month", "region", "category", "total_orders", "unique_customers", "total_quantity", "total_revenue", "total_cost", "total_profit", "avg_discount"],
+            "partitionBy": []
+        },
+        {
+            "name": "gold_customer_rfm",
+            "format": "delta",
+            "description": "Customer RFM segmentation (Recency, Frequency, Monetary)",
+            "columns": ["customer_id", "customer_name", "segment", "region", "recency_days", "frequency", "monetary", "r_score", "f_score", "m_score", "customer_segment"],
+            "partitionBy": []
+        }
+    ],
+    "files": {
+        "raw": {
+            "path": "Files/raw/",
+            "description": "Raw CSV files from source systems",
+            "files": ["dim_customers.csv", "dim_products.csv", "dim_date.csv", "dim_sales_reps.csv", "fact_sales.csv", "fact_returns.csv", "fact_targets.csv"]
+        },
+        "staging": {
+            "path": "Files/staging/",
+            "description": "Cleaned and validated Parquet files",
+            "files": ["dim_customers/", "dim_products/", "dim_date/", "fact_sales/", "fact_returns/", "fact_targets/"]
+        }
+    },
+    "sqlEndpoint": {
+        "type": "auto-generated",
+        "mode": "read-only",
+        "usage": "Power BI Direct Lake / ad-hoc T-SQL queries"
+    },
+    "scheduling": {
+        "sparkNotebook": {
+            "schedule": "Daily at 06:00 UTC",
+            "retryPolicy": { "count": 2, "intervalInSeconds": 300 }
+        },
+        "dataflowGen2": {
+            "schedule": "Every 4 hours",
+            "retryPolicy": { "count": 1, "intervalInSeconds": 600 }
+        }
+    }
+}
